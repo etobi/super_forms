@@ -59,45 +59,6 @@ $TCA['tx_superforms_domain_model_validator'] = array(
 				'max' => 255,
 			)
 		),
-		'hidden' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
-			'config' => array(
-				'type' => 'check',
-			),
-		),
-		'starttime' => array(
-			'exclude' => 1,
-			'l10n_mode' => 'mergeIfNotBlank',
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.starttime',
-			'config' => array(
-				'type' => 'input',
-				'size' => 13,
-				'max' => 20,
-				'eval' => 'datetime',
-				'checkbox' => 0,
-				'default' => 0,
-				'range' => array(
-					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-				),
-			),
-		),
-		'endtime' => array(
-			'exclude' => 1,
-			'l10n_mode' => 'mergeIfNotBlank',
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.endtime',
-			'config' => array(
-				'type' => 'input',
-				'size' => 13,
-				'max' => 20,
-				'eval' => 'datetime',
-				'checkbox' => 0,
-				'default' => 0,
-				'range' => array(
-					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-				),
-			),
-		),
 		'type' => array(
 			'exclude' => 1,
 			'l10n_mode' => 'exclude',

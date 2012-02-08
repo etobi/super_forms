@@ -5,8 +5,7 @@ if (!defined ('TYPO3_MODE')) {
 
 $tempShowItems = array(
 	'general' => 'type, label, name,',
-	'validators' => '--div--;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.validators, validation_depends_on_field, validators',
-	'access' => '--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, hidden;;1, starttime, endtime'
+	'validators' => '--div--;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.validators, validation_depends_on_field, validators'
 );
 
 $TCA['tx_superforms_domain_model_field'] = array(
@@ -16,14 +15,14 @@ $TCA['tx_superforms_domain_model_field'] = array(
 	),
 	'types' => array(
 		'Tx_SuperForms_Domain_Model_Field_Base'         => array('showitem' => 'type'),
-		'Tx_SuperForms_Domain_Model_Field_Textfield'    => array('showitem' => $tempShowItems['general'] . ', ' . $tempShowItems['validators'] . ', ' . $tempShowItems['access']),
-		'Tx_SuperForms_Domain_Model_Field_Textarea'     => array('showitem' => $tempShowItems['general'] . ', ' . $tempShowItems['validators'] . ', ' . $tempShowItems['access']),
-		'Tx_SuperForms_Domain_Model_Field_Radio'        => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['validators'] . ', ' . $tempShowItems['access']),
-		'Tx_SuperForms_Domain_Model_Field_Checkbox'     => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['validators'] . ', ' . $tempShowItems['access']),
-		'Tx_SuperForms_Domain_Model_Field_Select'       => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['validators'] . ', ' . $tempShowItems['access']),
-		'Tx_SuperForms_Domain_Model_Field_SubmitButton' => array('showitem' => $tempShowItems['general'] . ', value, ' . $tempShowItems['access']),
-		'Tx_SuperForms_Domain_Model_Field_Textblock'    => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['access']),
-		'Tx_SuperForms_Domain_Model_Field_Hidden'       => array('showitem' => $tempShowItems['general'] . ', value, ' . $tempShowItems['access']),
+		'Tx_SuperForms_Domain_Model_Field_Textfield'    => array('showitem' => $tempShowItems['general'] . ', ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Textarea'     => array('showitem' => $tempShowItems['general'] . ', ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Radio'        => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Checkbox'     => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Select'       => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_SubmitButton' => array('showitem' => $tempShowItems['general'] . ', value'),
+		'Tx_SuperForms_Domain_Model_Field_Textblock'    => array('showitem' => $tempShowItems['general'] . ', options'),
+		'Tx_SuperForms_Domain_Model_Field_Hidden'       => array('showitem' => $tempShowItems['general'] . ', value'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -67,45 +66,6 @@ $TCA['tx_superforms_domain_model_field'] = array(
 				'size' => 30,
 				'max' => 255,
 			)
-		),
-		'hidden' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
-			'config' => array(
-				'type' => 'check',
-			),
-		),
-		'starttime' => array(
-			'exclude' => 1,
-			'l10n_mode' => 'mergeIfNotBlank',
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.starttime',
-			'config' => array(
-				'type' => 'input',
-				'size' => 13,
-				'max' => 20,
-				'eval' => 'datetime',
-				'checkbox' => 0,
-				'default' => 0,
-				'range' => array(
-					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-				),
-			),
-		),
-		'endtime' => array(
-			'exclude' => 1,
-			'l10n_mode' => 'mergeIfNotBlank',
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.endtime',
-			'config' => array(
-				'type' => 'input',
-				'size' => 13,
-				'max' => 20,
-				'eval' => 'datetime',
-				'checkbox' => 0,
-				'default' => 0,
-				'range' => array(
-					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-				),
-			),
 		),
 		'type' => array(
 			'exclude' => 1,
@@ -194,7 +154,7 @@ $TCA['tx_superforms_domain_model_field'] = array(
 					array('(none)',  '0'),
 				),
 				'foreign_table' => 'tx_superforms_domain_model_field',
-				'foreign_table_where' => 'AND tx_superforms_domain_model_field.form = ###REC_FIELD_form###',
+				'foreign_table_where' => 'AND tx_superforms_domain_model_field.uid != ###REC_FIELD_uid### AND tx_superforms_domain_model_field.form = ###REC_FIELD_form###',
 			)
 		)
 	),
