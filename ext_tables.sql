@@ -42,6 +42,7 @@ CREATE TABLE tx_superforms_domain_model_field (
 	pid int(11) DEFAULT '0' NOT NULL,
 
 	form int(11) DEFAULT '0' NOT NULL,
+	sorting int(11) DEFAULT '0' NOT NULL,
 	label varchar(255) DEFAULT '' NOT NULL,
 	name varchar(255) DEFAULT '' NOT NULL,
 	type varchar(255) DEFAULT '' NOT NULL,

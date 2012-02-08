@@ -128,6 +128,11 @@ $TCA['tx_superforms_domain_model_field'] = array(
 				'type' => 'passthrough',
 			),
 		),
+		'sorting' => array(
+			'config' => array(
+				'type' => 'passthrough',
+			),
+		),
 		'validators' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.validators',
