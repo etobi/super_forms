@@ -55,6 +55,16 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	protected $value;
 
 	/**
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Validator>
+	 */
+	protected $validators;
+
+	/**
+	 * @var Tx_SuperForms_Domain_Model_Field
+	 */
+	protected $validationDependsOnField;
+
+	/**
 	 * 
 	 */
 	public function __construct() {}
@@ -127,6 +137,34 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function getValue() {
 		return $this->value;
+	}
+
+	/**
+	 * @param \Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Validator> $validators
+	 */
+	public function setValidators($validators) {
+		$this->validators = $validators;
+	}
+
+	/**
+	 * @return \Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Validator>
+	 */
+	public function getValidators() {
+		return $this->validators;
+	}
+
+	/**
+	 * @param \Tx_SuperForms_Domain_Model_Field $validationDependsOnField
+	 */
+	public function setValidationDependsOnField($validationDependsOnField) {
+		$this->validationDependsOnField = $validationDependsOnField;
+	}
+
+	/**
+	 * @return \Tx_SuperForms_Domain_Model_Field
+	 */
+	public function getValidationDependsOnField() {
+		return $this->validationDependsOnField;
 	}
 
 }

@@ -3,21 +3,27 @@ if (!defined ('TYPO3_MODE')) {
 	die('Access denied.');
 }
 
+$tempShowItems = array(
+	'general' => 'type, label, name,',
+	'validators' => '--div--;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.validators, validation_depends_on_field, validators',
+	'access' => '--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, hidden;;1, starttime, endtime'
+);
+
 $TCA['tx_superforms_domain_model_field'] = array(
 	'ctrl' => $TCA['tx_superforms_domain_model_field']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => '',
 	),
 	'types' => array(
-		'Tx_SuperForms_Domain_Model_Field_Base' => array('showitem' => 'type'),
-		'Tx_SuperForms_Domain_Model_Field_Textfield' => array('showitem' => 'type, label, name, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, hidden;;1, starttime, endtime'),
-		'Tx_SuperForms_Domain_Model_Field_Textarea' => array('showitem' => 'type, label, name, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, hidden;;1, starttime, endtime'),
-		'Tx_SuperForms_Domain_Model_Field_Radio' => array('showitem' => 'type, label, name, options, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, hidden;;1, starttime, endtime'),
-		'Tx_SuperForms_Domain_Model_Field_Checkbox' => array('showitem' => 'type, label, name, options, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, hidden;;1, starttime, endtime'),
-		'Tx_SuperForms_Domain_Model_Field_Select' => array('showitem' => 'type, label, name, options, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, hidden;;1, starttime, endtime'),
-		'Tx_SuperForms_Domain_Model_Field_SubmitButton' => array('showitem' => 'type, label, name, value, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, hidden;;1, starttime, endtime'),
-		'Tx_SuperForms_Domain_Model_Field_Textblock' => array('showitem' => 'type, label, name, options, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, hidden;;1, starttime, endtime'),
-		'Tx_SuperForms_Domain_Model_Field_Hidden' => array('showitem' => 'type, label, name, value, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, hidden;;1, starttime, endtime'),
+		'Tx_SuperForms_Domain_Model_Field_Base'         => array('showitem' => 'type'),
+		'Tx_SuperForms_Domain_Model_Field_Textfield'    => array('showitem' => $tempShowItems['general'] . ', ' . $tempShowItems['validators'] . ', ' . $tempShowItems['access']),
+		'Tx_SuperForms_Domain_Model_Field_Textarea'     => array('showitem' => $tempShowItems['general'] . ', ' . $tempShowItems['validators'] . ', ' . $tempShowItems['access']),
+		'Tx_SuperForms_Domain_Model_Field_Radio'        => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['validators'] . ', ' . $tempShowItems['access']),
+		'Tx_SuperForms_Domain_Model_Field_Checkbox'     => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['validators'] . ', ' . $tempShowItems['access']),
+		'Tx_SuperForms_Domain_Model_Field_Select'       => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['validators'] . ', ' . $tempShowItems['access']),
+		'Tx_SuperForms_Domain_Model_Field_SubmitButton' => array('showitem' => $tempShowItems['general'] . ', value, ' . $tempShowItems['access']),
+		'Tx_SuperForms_Domain_Model_Field_Textblock'    => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['access']),
+		'Tx_SuperForms_Domain_Model_Field_Hidden'       => array('showitem' => $tempShowItems['general'] . ', value, ' . $tempShowItems['access']),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -162,6 +168,35 @@ $TCA['tx_superforms_domain_model_field'] = array(
 				'type' => 'passthrough',
 			),
 		),
+		'validators' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.validators',
+			'config' => array(
+				'type' => 'inline',
+				'foreign_table' => 'tx_superforms_domain_model_validator',
+				'foreign_field' => 'field',
+				'maxitems'      => 9999,
+				'appearance' => array(
+					'collapse' => 0,
+					'levelLinksPosition' => 'top',
+					'showSynchronizationLink' => 1,
+					'showPossibleLocalizationRecords' => 1,
+					'showAllLocalizationLink' => 1
+				),
+			)
+		),
+		'validation_depends_on_field' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.validation_depends_on_field',
+			'config' => array(
+				'type' => 'select',
+				'items' => array(
+					array('(none)',  '0'),
+				),
+				'foreign_table' => 'tx_superforms_domain_model_field',
+				'foreign_table_where' => 'AND tx_superforms_domain_model_field.form = ###REC_FIELD_form###',
+			)
+		)
 	),
 );
 ?>

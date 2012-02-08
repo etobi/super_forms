@@ -10,10 +10,17 @@
 			<label index="tx_superforms_domain_model_form.title">Title</label>
 			<label index="tx_superforms_domain_model_form.fields">Fields</label>
 			<label index="tx_superforms_domain_model_field">Field</label>
+			<label index="tx_superforms_domain_model_field.type">Type</label>
+			<label index="tx_superforms_domain_model_field.validators">Validation</label>
+			<label index="tx_superforms_domain_model_field.validation_depends_on_field">Validation depends on Field:</label>
 			<label index="tx_superforms_domain_model_field.label">Label</label>
 			<label index="tx_superforms_domain_model_field.name">Field name</label>
 			<label index="tx_superforms_domain_model_field.options">Options</label>
 			<label index="tx_superforms_domain_model_field.value">Value</label>
+			<label index="tx_superforms_domain_model_validator">Validator</label>
+			<label index="tx_superforms_domain_model_validator.type">Type</label>
+			<label index="tx_superforms_domain_model_validator.configuration">Configuration</label>
+			<label index="tx_superforms_domain_model_validator.configuration2">Configuration</label>
 		</languageKey>
 	</data>
 </T3locallang>
