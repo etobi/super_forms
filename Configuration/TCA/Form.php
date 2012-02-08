@@ -99,6 +99,7 @@ $TCA['tx_superforms_domain_model_form'] = array(
 			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.title',
 			'config' => array(
 				'type' => 'input',
+				'eval' => 'required',
 			)
 		),
 		'fields' => array(
