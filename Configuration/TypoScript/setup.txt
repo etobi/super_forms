@@ -12,3 +12,60 @@ plugin.tx_superforms {
 		storagePid = {$plugin.tx_superforms.persistence.storagePid}
 	}
 }
+
+config.tx_extbase.persistence.classes {
+	Tx_SuperForms_Domain_Model_Field_Base {
+		mapping {
+			tableName = tx_superforms_domain_model_field
+			recordType = Tx_SuperForms_Domain_Model_Field_Base
+		}
+	}
+	Tx_SuperForms_Domain_Model_Field_Textfield {
+		mapping {
+			tableName = tx_superforms_domain_model_field
+			recordType = Tx_SuperForms_Domain_Model_Field_Textfield
+		}
+	}
+	Tx_SuperForms_Domain_Model_Field_Textarea {
+		mapping {
+			tableName = tx_superforms_domain_model_field
+			recordType = Tx_SuperForms_Domain_Model_Field_Textarea
+		}
+	}
+	Tx_SuperForms_Domain_Model_Field_Radio {
+		mapping {
+			tableName = tx_superforms_domain_model_field
+			recordType = Tx_SuperForms_Domain_Model_Field_Radio
+		}
+	}
+	Tx_SuperForms_Domain_Model_Field_Checkbox {
+		mapping {
+			tableName = tx_superforms_domain_model_field
+			recordType = Tx_SuperForms_Domain_Model_Field_Checkbox
+		}
+	}
+	Tx_SuperForms_Domain_Model_Field_Select {
+		mapping {
+			tableName = tx_superforms_domain_model_field
+			recordType = Tx_SuperForms_Domain_Model_Field_Select
+		}
+	}
+	Tx_SuperForms_Domain_Model_Field_SubmitButton {
+		mapping {
+			tableName = tx_superforms_domain_model_field
+			recordType = Tx_SuperForms_Domain_Model_Field_SubmitButton
+		}
+	}
+	Tx_SuperForms_Domain_Model_Field_Textblock {
+		mapping {
+			tableName = tx_superforms_domain_model_field
+			recordType = Tx_SuperForms_Domain_Model_Field_Textblock
+		}
+	}
+	Tx_SuperForms_Domain_Model_Field_Hidden {
+		mapping {
+			tableName = tx_superforms_domain_model_field
+			recordType = Tx_SuperForms_Domain_Model_Field_Hidden
+		}
+	}
+}
