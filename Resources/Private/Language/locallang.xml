@@ -6,7 +6,14 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="foo">bar</label>
+			<label index="tx_superforms_domain_model_form">Form</label>
+			<label index="tx_superforms_domain_model_form.title">Title</label>
+			<label index="tx_superforms_domain_model_form.fields">Fields</label>
+			<label index="tx_superforms_domain_model_field">Field</label>
+			<label index="tx_superforms_domain_model_field.label">Label</label>
+			<label index="tx_superforms_domain_model_field.name">Field name</label>
+			<label index="tx_superforms_domain_model_field.options">Options</label>
+			<label index="tx_superforms_domain_model_field.value">Value</label>
 		</languageKey>
 	</data>
 </T3locallang>
