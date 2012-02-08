@@ -1,0 +1,14 @@
+plugin.tx_superforms {
+	view {
+		templateRootPath = {$plugin.tx_superforms.view.templateRootPath}
+		partialRootPath = {$plugin.tx_superforms.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_superforms.view.layoutRootPath}
+	}
+
+	settings {
+	}
+
+	persistence {
+		storagePid = {$plugin.tx_superforms.persistence.storagePid}
+	}
+}
