@@ -54,4 +54,23 @@ $TCA['tx_superforms_domain_model_validator'] = array(
 	),
 );
 
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'Dev',
+	'Super Forms Dev'
+);
+
+$pluginSignature = str_replace('_','',$_EXTKEY) . '_dev';
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:'.$_EXTKEY.'/Configuration/FlexForms/Display.xml');
+
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'Display',
+	'Super Forms Display'
+);
+
+$pluginSignature = str_replace('_','',$_EXTKEY) . '_display';
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:'.$_EXTKEY.'/Configuration/FlexForms/Display.xml');
 ?>

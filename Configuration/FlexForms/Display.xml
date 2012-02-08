@@ -1,0 +1,29 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<general>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:bum_mt_recipes/Resources/Private/Language/locallang_db.xml:FlexForm.Default.sheet.general</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.worldsToDisplay>
+						<TCEforms>
+							<label>LLL:EXT:bum_mt_jokes/Resources/Private/Language/locallang_db.xml:FlexForm.Default.worldsToDisplay</label>
+							<config>
+								<type>select</type>
+								<foreign_table>tx_bummtbase_domain_model_world</foreign_table>
+								<size>5</size>
+								<minitems>0</minitems>
+								<maxitems>4</maxitems>
+							</config>
+						</TCEforms>
+					</settings.worldsToDisplay>
+				</el>
+			</ROOT>
+		</general>
+	</sheets>
+</T3DataStructure>

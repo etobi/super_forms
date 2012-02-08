@@ -60,12 +60,12 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	protected $validators;
 
 	/**
-	 * @var Tx_SuperForms_Domain_Model_Field
+	 * @var Tx_SuperForms_Domain_Model_Field_Base
 	 */
 	protected $validationDependsOnField;
 
 	/**
-	 * 
+	 *
 	 */
 	public function __construct() {}
 
@@ -154,17 +154,24 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	}
 
 	/**
-	 * @param \Tx_SuperForms_Domain_Model_Field $validationDependsOnField
+	 * @param \Tx_SuperForms_Domain_Model_Field_Base $validationDependsOnField
 	 */
 	public function setValidationDependsOnField($validationDependsOnField) {
 		$this->validationDependsOnField = $validationDependsOnField;
 	}
 
 	/**
-	 * @return \Tx_SuperForms_Domain_Model_Field
+	 * @return \Tx_SuperForms_Domain_Model_Field_Base
 	 */
 	public function getValidationDependsOnField() {
 		return $this->validationDependsOnField;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getShortType() {
+		return array_pop(explode('_', $this->getType()));
 	}
 
 }
