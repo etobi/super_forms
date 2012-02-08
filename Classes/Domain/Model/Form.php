@@ -35,7 +35,7 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	protected $title;
 
 	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Field_FieldInterface>
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Field_Base>
 	 */
 	protected $fields;
 
@@ -45,14 +45,14 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	public function __construct() {}
 
 	/**
-	 * @param \Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Field_FieldInterface> $fields
+	 * @param \Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Field_Base> $fields
 	 */
 	public function setFields($fields) {
 		$this->fields = $fields;
 	}
 
 	/**
-	 * @return \Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Field_FieldInterface>
+	 * @return \Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Field_Base>
 	 */
 	public function getFields() {
 		return $this->fields;
