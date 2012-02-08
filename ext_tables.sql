@@ -50,7 +50,7 @@ CREATE TABLE tx_superforms_domain_model_field (
 	type varchar(255) DEFAULT '' NOT NULL,
 	options text NOT NULL,
 	value varchar(255) DEFAULT '' NOT NULL,
-	validations int(11) unsigned DEFAULT '0' NOT NULL,
+	validators int(11) unsigned DEFAULT '0' NOT NULL,
 	validation_depends_on_field int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
