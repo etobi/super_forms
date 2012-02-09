@@ -29,6 +29,16 @@
  */
 class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_AbstractEntity implements Tx_SuperForms_Domain_Model_Field_FieldInterface {
 
+	const TYPE_BASE = 'Tx_SuperForms_Domain_Model_Field_Base';
+	const TYPE_TEXTFIELD = 'Tx_SuperForms_Domain_Model_Field_Textfield';
+	const TYPE_TEXTAREA = 'Tx_SuperForms_Domain_Model_Field_Textarea';
+	const TYPE_RADIO = 'Tx_SuperForms_Domain_Model_Field_Radio';
+	const TYPE_CHECKBOX = 'Tx_SuperForms_Domain_Model_Field_Checkbox';
+	const TYPE_SELECT = 'Tx_SuperForms_Domain_Model_Field_Select';
+	const TYPE_SUBMITBUTTON = 'Tx_SuperForms_Domain_Model_Field_SubmitButton';
+	const TYPE_TEXTBLOCK = 'Tx_SuperForms_Domain_Model_Field_Textblock';
+	const TYPE_HIDDEN = 'Tx_SuperForms_Domain_Model_Field_Hidden';
+
 	/**
 	 * @var string
 	 */
