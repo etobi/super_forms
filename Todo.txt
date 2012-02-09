@@ -1,5 +1,0 @@
-Textarea
-	Rows / Cols
-	Rename Options and make RTE
-
-Default Values
