@@ -184,5 +184,51 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 		return array_pop(explode('_', $this->getType()));
 	}
 
+	/**
+	 * @return boolean
+	 */
+	public function getHasMultipleOptions() {
+		return (count(explode(PHP_EOL, $this->options)) > 1);
+	}
+
+	/**
+	 * returns the options parsed and prepared as an object
+	 *
+	 * @return array
+	 */
+	public function getSplittedOptions() {
+		if (empty($this->options)) {
+			return array();
+		}
+
+		$options = array();
+		foreach (explode(PHP_EOL, $this->options) as $option) {
+			$options[] = $this->getSplittedOption($option);
+		}
+
+		return $options;
+	}
+
+	/**
+	 * splits an option string into parameters for select, radio and checkbox
+	 *
+	 * @param string $optionString if nothing specified, $this->options is used
+	 * @return array
+	 */
+	public function getSplittedOption($optionString = '') {
+		if (empty($optionString)) {
+			$optionString = $this->options;
+		}
+
+		$selected = FALSE;
+
+		if (substr($optionString, 0, 1) === '*') {
+			$selected = TRUE;
+			$optionString = substr($optionString, 1);
+		}
+
+		list($value, $label) = explode(':', $optionString);
+		return array('value' => $value, 'label' => $label, 'selected' => $selected);
+	}
 }
 ?>

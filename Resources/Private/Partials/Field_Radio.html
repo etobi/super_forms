@@ -1,3 +1,5 @@
 <div>
-	{field.label}
+	<f:for each="{field.splittedOptions}" as="option">
+		<f:form.radio name="{field.name}" value="{option.value}" checked="{option.selected}" /> {option.label}<br />
+	</f:for>
 </div>
