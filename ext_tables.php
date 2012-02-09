@@ -41,6 +41,24 @@ $TCA['tx_superforms_domain_model_field'] = array(
 	),
 );
 
+$TCA['tx_superforms_domain_model_processor'] = array(
+	'ctrl' => array(
+		'title'	=> 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor',
+		'label' => 'title',
+		'label_alt' => 'type',
+		'tstamp' => 'tstamp',
+		'crdate' => 'crdate',
+		'cruser_id' => 'cruser_id',
+		'dividers2tabs' => TRUE,
+		'delete' => 'deleted',
+		'type' => 'type',
+		'hideTable' => TRUE,
+		'enablecolumns' => array(),
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Processor.php',
+		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/model.gif'
+	),
+);
+
 $TCA['tx_superforms_domain_model_validator'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_validator',

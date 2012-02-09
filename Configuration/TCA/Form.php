@@ -9,7 +9,10 @@ $TCA['tx_superforms_domain_model_form'] = array(
 		'showRecordFieldList' => '',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'title, fields'),
+		'1' => array('showitem' => 'title, name,' .
+			'--div--;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.fields, fields,' .
+			'--div--;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.processors, processors'
+		),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -60,7 +63,15 @@ $TCA['tx_superforms_domain_model_form'] = array(
 			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.title',
 			'config' => array(
 				'type' => 'input',
-				'eval' => 'required',
+			)
+		),
+		'name' => array(
+			'exclude' => 0,
+			'l10n_mode' => 'exclude',
+			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.name',
+			'config' => array(
+				'type' => 'input',
+				'eval' => 'required,alphanum,unique'
 			)
 		),
 		'fields' => array(
@@ -74,6 +85,22 @@ $TCA['tx_superforms_domain_model_form'] = array(
 				'maxitems'      => 9999,
 				'appearance' => array(
 					'useSortable' => 1,
+					'collapse' => 0,
+					'levelLinksPosition' => 'top',
+					'showSynchronizationLink' => 1,
+					'showPossibleLocalizationRecords' => 1,
+					'showAllLocalizationLink' => 1
+				),
+			)
+		),
+		'processors' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.processors',
+			'config' => array(
+				'type' => 'inline',
+				'foreign_table' => 'tx_superforms_domain_model_processor',
+				'maxitems'      => 9999,
+				'appearance' => array(
 					'collapse' => 0,
 					'levelLinksPosition' => 'top',
 					'showSynchronizationLink' => 1,

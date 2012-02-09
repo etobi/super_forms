@@ -27,7 +27,16 @@
 /**
  * @package super_forms
  */
-class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_AbstractEntity {
+
+	const TYPE_EMAIL = 'Tx_SuperForms_Domain_Model_Processor_Email';
+	const TYPE_DATABASE = 'Tx_SuperForms_Domain_Model_Processor_Database';
+	const TYPE_FILE = 'Tx_SuperForms_Domain_Model_Processor_File';
+
+	/**
+	 * @var string
+	 */
+	protected $type;
 
 	/**
 	 * @var string
@@ -37,35 +46,20 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * @var string
 	 */
-	protected $name;
+	protected $options;
 
 	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Field_Base>
+	 * @param string $options
 	 */
-	protected $fields;
-
-	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Processor>
-	 */
-	protected $processors;
-
-	/**
-	 * 
-	 */
-	public function __construct() {}
-
-	/**
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Field_Base> $fields
-	 */
-	public function setFields($fields) {
-		$this->fields = $fields;
+	public function setOptions($options) {
+		$this->options = $options;
 	}
 
 	/**
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Field_Base>
+	 * @return string
 	 */
-	public function getFields() {
-		return $this->fields;
+	public function getOptions() {
+		return $this->options;
 	}
 
 	/**
@@ -83,32 +77,17 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	}
 
 	/**
-	 * @param string $name
+	 * @param string $type
 	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setType($type) {
+		$this->type = $type;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getName() {
-		return $this->name;
+	public function getType() {
+		return $this->type;
 	}
-
-	/**
-	 * @param \Tx_Extbase_Persistence_ObjectStorage $processors
-	 */
-	public function setProcessors($processors) {
-		$this->processors = $processors;
-	}
-
-	/**
-	 * @return \Tx_Extbase_Persistence_ObjectStorage
-	 */
-	public function getProcessors() {
-		return $this->processors;
-	}
-
 }
 ?>
