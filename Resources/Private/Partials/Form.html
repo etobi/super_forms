@@ -1,4 +1,6 @@
 <h5>{form.title}</h5>
+<f:debug>{form.fields}</f:debug>
 <f:for each="{form.fields}" as="field">
+	{field.label}:
 	<f:render partial="Field_{field.shortType}" arguments="{field: field}" />
 </f:for>

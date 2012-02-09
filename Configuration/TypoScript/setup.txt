@@ -15,10 +15,15 @@ plugin.tx_superforms {
 
 config.tx_extbase.persistence.classes {
 	Tx_SuperForms_Domain_Model_Field_Base {
-		mapping {
-			tableName = tx_superforms_domain_model_field
-			recordType = Tx_SuperForms_Domain_Model_Field_Base
-		}
+		subclasses {
+			Tx_SuperForms_Domain_Model_Field_Textfield = Tx_SuperForms_Domain_Model_Field_Textfield
+			Tx_SuperForms_Domain_Model_Field_Textarea = Tx_SuperForms_Domain_Model_Field_Textarea
+			Tx_SuperForms_Domain_Model_Field_Radio = Tx_SuperForms_Domain_Model_Field_Radio
+			Tx_SuperForms_Domain_Model_Field_Checkbox = Tx_SuperForms_Domain_Model_Field_Checkbox
+			Tx_SuperForms_Domain_Model_Field_Select = Tx_SuperForms_Domain_Model_Field_Select
+			Tx_SuperForms_Domain_Model_Field_SubmitButton = Tx_SuperForms_Domain_Model_Field_SubmitButton
+			Tx_SuperForms_Domain_Model_Field_Textblock = Tx_SuperForms_Domain_Model_Field_Textblock
+			Tx_SuperForms_Domain_Model_Field_Hidden = Tx_SuperForms_Domain_Model_Field_Hidden
 	}
 	Tx_SuperForms_Domain_Model_Field_Textfield {
 		mapping {
