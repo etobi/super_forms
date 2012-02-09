@@ -23,4 +23,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
+	// Hook on inserting, updating, deleting records
+$GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$_EXTKEY] =
+	'EXT:' . $_EXTKEY . '/Classes/Hook/TceMainHook.php:tx_SuperForms_Hook_TceMainHook';
+
 ?>
