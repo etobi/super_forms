@@ -62,6 +62,7 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_CHECKBOX => array('varchar(255)', 'DEFAULT \'\' NOT NULL'),
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_SELECT => array('varchar(255)', 'DEFAULT \'\' NOT NULL'),
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_HIDDEN => array('varchar(255)', 'DEFAULT \'\' NOT NULL'),
+		Tx_SuperForms_Domain_Model_Field_Base::TYPE_AUTOFILL => array('varchar(255)', 'DEFAULT \'\' NOT NULL'),
 	);
 
 	/**
@@ -236,11 +237,12 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 	}
 
 	/**
-	 * @param Tx_SuperForms_Domain_Model_Field_FieldInterface $field
+	 * @param Tx_SuperForms_Domain_Model_Field_FieldInterface|string $field
 	 * @return string
 	 */
-	protected function getColumnNameForField(Tx_SuperForms_Domain_Model_Field_FieldInterface $field) {
-		return $this->fieldPrefix . $field->getName();
+	public function getColumnNameForField($field) {
+		$fieldName = $field instanceof Tx_SuperForms_Domain_Model_Field_FieldInterface ? $field->getName() : $field;
+		return $this->fieldPrefix . $fieldName;
 	}
 
 	/**

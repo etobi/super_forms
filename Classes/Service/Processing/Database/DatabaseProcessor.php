@@ -47,10 +47,10 @@ class Tx_SuperForms_Service_Processing_Database_DatabaseProcessor extends Tx_Sup
 	}
 
 	/**
-	 * @param array $formResponse
+	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
 	 * @return void
 	 */
-	public function process($formResponse) {
+	public function process(Tx_SuperForms_Domain_Model_Response $formResponse) {
 		if (!$this->tableService->tableExists($this->form)) return;
 
 		$tableName = $this->tableService->getTableNameForForm($this->form);
@@ -62,8 +62,14 @@ class Tx_SuperForms_Service_Processing_Database_DatabaseProcessor extends Tx_Sup
 	 * @param array $formResponse
 	 * @return array
 	 */
-	public function buildRow($formResponse) {
+	public function buildRow(Tx_SuperForms_Domain_Model_Response $formResponse) {
 		$row = array();
+
+		foreach($formResponse->toArray() as $field => $value) {
+			if (empty($field)) continue;
+			if (is_array($value)) $value = implode(',', $value);
+			$row[$this->tableService->getColumnNameForField($field)] = $value;
+		}
 		$row = t3lib_div::array_merge_recursive_overrule(
 			$row,
 			array(
@@ -72,12 +78,6 @@ class Tx_SuperForms_Service_Processing_Database_DatabaseProcessor extends Tx_Sup
 			)
 		);
 
-		// TODO set username if field exists
-
-		$row = t3lib_div::array_merge_recursive_overrule(
-			$row,
-			$formResponse
-		);
 		return $row;
 	}
 

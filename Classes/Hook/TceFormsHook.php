@@ -23,26 +23,21 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+
 /**
  * @package super_forms
  */
-class Tx_SuperForms_Domain_Model_Field_Hidden extends Tx_SuperForms_Domain_Model_Field_Base {
+class Tx_SuperForms_Hook_TceFormsHook {
 
-	/**
-	 * @return string
-	 */
-	public function getValue() {
-		return $this->getConfiguration();
+	public static function getModeOptions($config, $pObj) {
+		if ($config['table'] === 'tx_superforms_domain_model_field') {
+			$type = $pObj->getRTypeNum($config['table'], $config['row']);
+			$options = $type::getModeOptions();
+			if ($options) {
+				$config['items'] = array_merge($config['items'], $options);
+			}
+		}
 	}
-
-	/**
-	 * @param string $value
-	 * @return void
-	 */
-	public function setValue($value) {
-		$this->setConfiguration($value);
-	}
-
 }
 
 ?>

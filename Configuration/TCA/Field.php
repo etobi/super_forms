@@ -23,7 +23,8 @@ $TCA['tx_superforms_domain_model_field'] = array(
 		'Tx_SuperForms_Domain_Model_Field_Select'       => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.options, ' . $tempShowItems['validators']),
 		'Tx_SuperForms_Domain_Model_Field_SubmitButton' => array('showitem' => $tempShowItems['general'] . ', value'),
 		'Tx_SuperForms_Domain_Model_Field_Textblock'    => array('showitem' => $tempShowItems['general'] . ', configuration;' . $tempLLL . '.value;;richtext[]'),
-		'Tx_SuperForms_Domain_Model_Field_Hidden'       => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.value'),
+		'Tx_SuperForms_Domain_Model_Field_Hidden'       => array('showitem' => 'type, name, configuration;' . $tempLLL . '.value'),
+		'Tx_SuperForms_Domain_Model_Field_Autofill'     => array('showitem' => 'type, name, mode'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -86,6 +87,7 @@ $TCA['tx_superforms_domain_model_field'] = array(
 					array('Submit button', 'Tx_SuperForms_Domain_Model_Field_SubmitButton'),
 					array('Text only', 'Tx_SuperForms_Domain_Model_Field_Textblock'),
 					array('Hidden', 'Tx_SuperForms_Domain_Model_Field_Hidden'),
+					array('Autofill', 'Tx_SuperForms_Domain_Model_Field_Autofill'),
 				),
 				'default' => 'Tx_SuperForms_Domain_Model_Field_Base'
 			)
@@ -144,6 +146,13 @@ $TCA['tx_superforms_domain_model_field'] = array(
 				'eval' => 'int',
 				'size' => 5,
 				'default' => 7,
+			)
+		),
+		'mode' => array(
+			'config' => array(
+				'type' => 'select',
+				'itemsProcFunc' => 'Tx_SuperForms_Hook_TceFormsHook->getModeOptions',
+				'size' => 1
 			)
 		),
 		'form' => array(

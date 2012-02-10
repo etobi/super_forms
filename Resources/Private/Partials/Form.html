@@ -1,5 +1,6 @@
 <h5>{form.title}</h5>
-<f:form fieldNamePrefix="tx_superforms_dev[form]">
+<f:form action="process" fieldNamePrefix="tx_superforms_dev[formResponseArray]">
+	<input type="hidden" name="tx_superforms_dev[form]" value="{form.uid}" />
 	<f:for each="{form.fields}" as="field">
 		{field.label}:
 		<f:render partial="Field_{field.shortType}" arguments="{field: field}" />

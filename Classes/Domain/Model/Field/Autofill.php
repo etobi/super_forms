@@ -26,23 +26,45 @@
 /**
  * @package super_forms
  */
-class Tx_SuperForms_Domain_Model_Field_Hidden extends Tx_SuperForms_Domain_Model_Field_Base {
+class Tx_SuperForms_Domain_Model_Field_Autofill extends Tx_SuperForms_Domain_Model_Field_Base {
 
 	/**
-	 * @return string
+	 * @param mixed $value
+	 * @return int|string
 	 */
-	public function getValue() {
-		return $this->getConfiguration();
+	public function processValue($value) {
+		switch ($this->getMode()) {
+			case 'date_dmY':
+				return date('d.m.Y');
+				break;
+			case 'date_HHMMii':
+				return date('H:M:i');
+				break;
+			case 'fe_user':
+				return intval($GLOBALS['TSFE']->fe_user->user['uid']);
+				break;
+			case 'page':
+				return intval($GLOBALS['TSFE']->id);
+				break;
+			case 'remoteIp':
+				return $_SERVER['REMOTE_ADDR'];
+				break;
+		}
 	}
 
 	/**
-	 * @param string $value
-	 * @return void
+	 * @static
+	 * @return array
 	 */
-	public function setValue($value) {
-		$this->setConfiguration($value);
+	public static function getModeOptions() {
+		return array(
+			array('Date', 'date_dmY'),
+			array('Time', 'date_HHMMii'),
+			array('Current FEUser', 'fe_user'),
+			array('Current Page UID', 'page'),
+			array('IP Address', 'remoteIp'),
+		);
 	}
-
 }
 
 ?>

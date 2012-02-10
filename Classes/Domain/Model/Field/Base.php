@@ -38,6 +38,7 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	const TYPE_SUBMITBUTTON = 'Tx_SuperForms_Domain_Model_Field_SubmitButton';
 	const TYPE_TEXTBLOCK = 'Tx_SuperForms_Domain_Model_Field_Textblock';
 	const TYPE_HIDDEN = 'Tx_SuperForms_Domain_Model_Field_Hidden';
+	const TYPE_AUTOFILL = 'Tx_SuperForms_Domain_Model_Field_Autofill';
 
 	/**
 	 * @var string
@@ -53,6 +54,11 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	 * @var string
 	 */
 	protected $type;
+
+	/**
+	 * @var string
+	 */
+	protected $mode;
 
 	/**
 	 * @var string
@@ -327,6 +333,36 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function getForm() {
 		return $this->form;
+	}
+
+	/**
+	 * @param mixed $value
+	 * @return mixed
+	 */
+	public function processValue($value) {
+		return $value;
+	}
+
+	/**
+	 * @static
+	 * @return null
+	 */
+	public static function getModeOptions() {
+		return NULL;
+	}
+
+	/**
+	 * @param string $mode
+	 */
+	public function setMode($mode) {
+		$this->mode = $mode;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getMode() {
+		return $this->mode;
 	}
 }
 ?>

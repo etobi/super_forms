@@ -48,6 +48,11 @@ interface Tx_SuperForms_Domain_Model_Field_FieldInterface {
 	 * @return string
 	 */
 	public function getConfiguration();
+
+	/**
+	 * @return array|null
+	 */
+	public static function getModeOptions();
 }
 
 ?>

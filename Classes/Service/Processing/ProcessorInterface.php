@@ -28,6 +28,11 @@
  * @package super_forms
  */
 interface Tx_SuperForms_Service_Processing_ProcessorInterface {
-	public function process($formResponse);
+	/**
+	 * @abstract
+	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
+	 * @return void
+	 */
+	public function process(Tx_SuperForms_Domain_Model_Response $formResponse);
 }
 ?>

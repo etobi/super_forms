@@ -28,6 +28,7 @@ config.tx_extbase.persistence.classes {
 			Tx_SuperForms_Domain_Model_Field_SubmitButton = Tx_SuperForms_Domain_Model_Field_SubmitButton
 			Tx_SuperForms_Domain_Model_Field_Textblock = Tx_SuperForms_Domain_Model_Field_Textblock
 			Tx_SuperForms_Domain_Model_Field_Hidden = Tx_SuperForms_Domain_Model_Field_Hidden
+			Tx_SuperForms_Domain_Model_Field_Autofill = Tx_SuperForms_Domain_Model_Field_Autofill
 		}
 	}
 	Tx_SuperForms_Domain_Model_Field_Textfield {
@@ -76,6 +77,12 @@ config.tx_extbase.persistence.classes {
 		mapping {
 			tableName = tx_superforms_domain_model_field
 			recordType = Tx_SuperForms_Domain_Model_Field_Hidden
+		}
+	}
+	Tx_SuperForms_Domain_Model_Field_Autofill {
+		mapping {
+			tableName = tx_superforms_domain_model_field
+			recordType = Tx_SuperForms_Domain_Model_Field_Autofill
 		}
 	}
 }
