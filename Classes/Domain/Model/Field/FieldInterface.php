@@ -47,7 +47,7 @@ interface Tx_SuperForms_Domain_Model_Field_FieldInterface {
 	/**
 	 * @return string
 	 */
-	public function getOptions();
+	public function getConfiguration();
 }
 
 ?>

@@ -57,7 +57,17 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * @var string
 	 */
-	protected $options;
+	protected $configuration;
+
+	/**
+	 * @var int
+	 */
+	protected $size;
+
+	/**
+	 * @var int
+	 */
+	protected $size2;
 
 	/**
 	 * @var string
@@ -122,20 +132,6 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	}
 
 	/**
-	 * @param string $options
-	 */
-	public function setOptions($options) {
-		$this->options = $options;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getOptions() {
-		return $this->options;
-	}
-
-	/**
 	 * @param string $value
 	 */
 	public function setValue($value) {
@@ -188,7 +184,7 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	 * @return boolean
 	 */
 	public function getHasMultipleOptions() {
-		return (count(explode(PHP_EOL, $this->options)) > 1);
+		return (count(explode(PHP_EOL, $this->configuration)) > 1);
 	}
 
 	/**
@@ -197,12 +193,12 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	 * @return array
 	 */
 	public function getSplittedOptions() {
-		if (empty($this->options)) {
+		if (empty($this->configuration)) {
 			return array();
 		}
 
 		$options = array();
-		foreach (explode(PHP_EOL, $this->options) as $option) {
+		foreach (explode(PHP_EOL, $this->configuration) as $option) {
 			$options[] = $this->getSplittedOption($option);
 		}
 
@@ -212,12 +208,12 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * splits an option string into parameters for select, radio and checkbox
 	 *
-	 * @param string $optionString if nothing specified, $this->options is used
+	 * @param string $optionString if nothing specified, $this->configuration is used
 	 * @return array
 	 */
 	public function getSplittedOption($optionString = '') {
 		if (empty($optionString)) {
-			$optionString = $this->options;
+			$optionString = $this->configuration;
 		}
 
 		$selected = FALSE;
@@ -270,6 +266,48 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 		}
 
 		return $selected;
+	}
+
+	/**
+	 * @param string $configuration
+	 */
+	public function setConfiguration($configuration) {
+		$this->configuration = $configuration;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getConfiguration() {
+		return $this->configuration;
+	}
+
+	/**
+	 * @param int $size
+	 */
+	public function setSize($size) {
+		$this->size = $size;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getSize() {
+		return $this->size;
+	}
+
+	/**
+	 * @param int $size2
+	 */
+	public function setSize2($size2) {
+		$this->size2 = $size2;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getSize2() {
+		return $this->size2;
 	}
 }
 ?>

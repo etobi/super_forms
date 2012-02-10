@@ -17,16 +17,20 @@
 			<label index="tx_superforms_domain_model_field.validation_depends_on_field">Validation depends on Field:</label>
 			<label index="tx_superforms_domain_model_field.label">Label</label>
 			<label index="tx_superforms_domain_model_field.name">Field name</label>
+			<label index="tx_superforms_domain_model_field.configuration">Configuration</label>
+			<label index="tx_superforms_domain_model_field.size">Size</label>
+			<label index="tx_superforms_domain_model_field.size_cols">Size (columns)</label>
+			<label index="tx_superforms_domain_model_field.size2">Size (rows)</label>
 			<label index="tx_superforms_domain_model_field.options">Options</label>
 			<label index="tx_superforms_domain_model_field.value">Value</label>
 			<label index="tx_superforms_domain_model_processor">Form processor</label>
 			<label index="tx_superforms_domain_model_processor.title">Title</label>
 			<label index="tx_superforms_domain_model_processor.type">Type</label>
-			<label index="tx_superforms_domain_model_processor.options">Options</label>
+			<label index="tx_superforms_domain_model_processor.configuration">Configuration</label>
 			<label index="tx_superforms_domain_model_validator">Validator</label>
 			<label index="tx_superforms_domain_model_validator.type">Type</label>
 			<label index="tx_superforms_domain_model_validator.configuration">Configuration</label>
-			<label index="tx_superforms_domain_model_validator.configuration2">Configuration</label>
+			<label index="tx_superforms_domain_model_validator.configuration2">Configuration 2</label>
 			<label index="FlexForm.Display.sheet.general">Generelles</label>
 			<label index="FlexForm.Display.form">Formular</label>
 		</languageKey>

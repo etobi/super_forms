@@ -10,9 +10,9 @@ $TCA['tx_superforms_domain_model_processor'] = array(
 	),
 	'types' => array(
 		'0' => array('showitem' => 'type, title'),
-		'Tx_SuperForms_Domain_Model_Processor_Email' => array('showitem' => 'type, title, options'),
-		'Tx_SuperForms_Domain_Model_Processor_Database' => array('showitem' => 'type, title, options'),
-		'Tx_SuperForms_Domain_Model_Processor_File' => array('showitem' => 'type, title, options'),
+		'Tx_SuperForms_Domain_Model_Processor_Email' => array('showitem' => 'type, title, configuration'),
+		'Tx_SuperForms_Domain_Model_Processor_Database' => array('showitem' => 'type, title'),
+		'Tx_SuperForms_Domain_Model_Processor_File' => array('showitem' => 'type, title, configuration'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -82,10 +82,10 @@ $TCA['tx_superforms_domain_model_processor'] = array(
 				'type' => 'input',
 			)
 		),
-		'options' => array(
+		'configuration' => array(
 			'exclude' => 0,
 			'l10n_mode' => 'exclude',
-			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.options',
+			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration',
 			'config' => array(
 				'type' => 'text',
 				'rows' => 5,

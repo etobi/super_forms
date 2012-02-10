@@ -28,6 +28,33 @@
  */
 class Tx_SuperForms_Domain_Model_Field_Textarea extends Tx_SuperForms_Domain_Model_Field_Base {
 
+	/**
+	 * @param int $size
+	 */
+	public function setCols($size) {
+		$this->setSize($size);
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getCols() {
+		return $this->getSize();
+	}
+
+	/**
+	 * @param int $size
+	 */
+	public function setRows($size) {
+		$this->setSize2($size);
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getRows() {
+		return $this->getSize2();
+	}
 }
 
 ?>

@@ -48,7 +48,9 @@ CREATE TABLE tx_superforms_domain_model_field (
 	label varchar(255) DEFAULT '' NOT NULL,
 	name varchar(255) DEFAULT '' NOT NULL,
 	type varchar(255) DEFAULT '' NOT NULL,
-	options text NOT NULL,
+	configuration text NOT NULL,
+	size int(11) unsigned DEFAULT '0' NOT NULL,
+	size2 int(11) unsigned DEFAULT '0' NOT NULL,
 	value varchar(255) DEFAULT '' NOT NULL,
 	validators int(11) unsigned DEFAULT '0' NOT NULL,
 	validation_depends_on_field int(11) unsigned DEFAULT '0' NOT NULL,
@@ -88,7 +90,7 @@ CREATE TABLE tx_superforms_domain_model_processor (
 
 	title varchar(255) DEFAULT '' NOT NULL,
 	type varchar(255) DEFAULT '' NOT NULL,
-	options text NOT NULL,
+	configuration text NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

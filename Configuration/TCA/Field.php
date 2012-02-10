@@ -4,9 +4,10 @@ if (!defined ('TYPO3_MODE')) {
 }
 
 $tempShowItems = array(
-	'general' => 'type, label, name,',
+	'general' => 'type, label',
 	'validators' => '--div--;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.validators, validation_depends_on_field, validators'
 );
+$tempLLL = 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field';
 
 $TCA['tx_superforms_domain_model_field'] = array(
 	'ctrl' => $TCA['tx_superforms_domain_model_field']['ctrl'],
@@ -15,14 +16,14 @@ $TCA['tx_superforms_domain_model_field'] = array(
 	),
 	'types' => array(
 		'Tx_SuperForms_Domain_Model_Field_Base'         => array('showitem' => 'type'),
-		'Tx_SuperForms_Domain_Model_Field_Textfield'    => array('showitem' => $tempShowItems['general'] . ', ' . $tempShowItems['validators']),
-		'Tx_SuperForms_Domain_Model_Field_Textarea'     => array('showitem' => $tempShowItems['general'] . ', ' . $tempShowItems['validators']),
-		'Tx_SuperForms_Domain_Model_Field_Radio'        => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['validators']),
-		'Tx_SuperForms_Domain_Model_Field_Checkbox'     => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['validators']),
-		'Tx_SuperForms_Domain_Model_Field_Select'       => array('showitem' => $tempShowItems['general'] . ', options, ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Textfield'    => array('showitem' => $tempShowItems['general'] . ', name, value, size, ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Textarea'     => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.value, size;' . $tempLLL . '.size_cols, size2, ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Radio'        => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.options, size, ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Checkbox'     => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.options, size, ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Select'       => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.options, ' . $tempShowItems['validators']),
 		'Tx_SuperForms_Domain_Model_Field_SubmitButton' => array('showitem' => $tempShowItems['general'] . ', value'),
-		'Tx_SuperForms_Domain_Model_Field_Textblock'    => array('showitem' => $tempShowItems['general'] . ', options'),
-		'Tx_SuperForms_Domain_Model_Field_Hidden'       => array('showitem' => $tempShowItems['general'] . ', value'),
+		'Tx_SuperForms_Domain_Model_Field_Textblock'    => array('showitem' => $tempShowItems['general'] . ', configuration;' . $tempLLL . '.value'),
+		'Tx_SuperForms_Domain_Model_Field_Hidden'       => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.value'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -70,7 +71,7 @@ $TCA['tx_superforms_domain_model_field'] = array(
 		'type' => array(
 			'exclude' => 1,
 			'l10n_mode' => 'exclude',
-			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.type',
+			'label' => '' . $tempLLL . '.type',
 			'config' => array(
 				'type' => 'select',
 				'size' => 1,
@@ -92,7 +93,7 @@ $TCA['tx_superforms_domain_model_field'] = array(
 		'label' => array(
 			'exclude' => 0,
 			'l10n_mode' => 'mergeIfNotBlank',
-			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.label',
+			'label' => '' . $tempLLL . '.label',
 			'config' => array(
 				'type' => 'input',
 			)
@@ -100,7 +101,7 @@ $TCA['tx_superforms_domain_model_field'] = array(
 		'name' => array(
 			'exclude' => 0,
 			'l10n_mode' => 'exclude',
-			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.name',
+			'label' => '' . $tempLLL . '.name',
 			'config' => array(
 				'type' => 'input',
 				'eval' => 'required,alphanum'
@@ -109,18 +110,40 @@ $TCA['tx_superforms_domain_model_field'] = array(
 		'value' => array(
 			'exclude' => 0,
 			'l10n_mode' => 'mergeIfNotBlank',
-			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.value',
+			'label' => '' . $tempLLL . '.value',
 			'config' => array(
 				'type' => 'input',
 			)
 		),
-		'options' => array(
+		'configuration' => array(
 			'exclude' => 0,
 			'l10n_mode' => 'exclude',
-			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.options',
+			'label' => '' . $tempLLL . '.configuration',
 			'config' => array(
 				'type' => 'text',
 				'rows' => 5,
+			)
+		),
+		'size' => array(
+			'exclude' => 0,
+			'l10n_mode' => 'exclude',
+			'label' => '' . $tempLLL . '.size',
+			'config' => array(
+				'type' => 'input',
+				'eval' => 'int',
+				'size' => 5,
+				'default' => 30,
+			)
+		),
+		'size2' => array(
+			'exclude' => 0,
+			'l10n_mode' => 'exclude',
+			'label' => '' . $tempLLL . '.size2',
+			'config' => array(
+				'type' => 'input',
+				'eval' => 'int',
+				'size' => 5,
+				'default' => 7,
 			)
 		),
 		'form' => array(
@@ -135,7 +158,7 @@ $TCA['tx_superforms_domain_model_field'] = array(
 		),
 		'validators' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.validators',
+			'label' => '' . $tempLLL . '.validators',
 			'config' => array(
 				'type' => 'inline',
 				'foreign_table' => 'tx_superforms_domain_model_validator',
@@ -152,7 +175,7 @@ $TCA['tx_superforms_domain_model_field'] = array(
 		),
 		'validation_depends_on_field' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_field.validation_depends_on_field',
+			'label' => '' . $tempLLL . '.validation_depends_on_field',
 			'config' => array(
 				'type' => 'select',
 				'items' => array(

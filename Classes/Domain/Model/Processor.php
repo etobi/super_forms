@@ -46,21 +46,7 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 	/**
 	 * @var string
 	 */
-	protected $options;
-
-	/**
-	 * @param string $options
-	 */
-	public function setOptions($options) {
-		$this->options = $options;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getOptions() {
-		return $this->options;
-	}
+	protected $configuration;
 
 	/**
 	 * @param string $title
@@ -88,6 +74,20 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 	 */
 	public function getType() {
 		return $this->type;
+	}
+
+	/**
+	 * @param string $configuration
+	 */
+	public function setConfiguration($configuration) {
+		$this->configuration = $configuration;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getConfiguration() {
+		return $this->configuration;
 	}
 }
 ?>
