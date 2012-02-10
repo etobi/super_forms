@@ -28,7 +28,6 @@
 			<label index="tx_superforms_domain_model_processor.type">Type</label>
 			<label index="tx_superforms_domain_model_processor.configuration">Configuration</label>
 			<label index="tx_superforms_domain_model_processor.configuration_mail">Recipient</label>
-			<label index="tx_superforms_domain_model_processor.configuration_file">File path (relative to document root)</label>
 			<label index="tx_superforms_domain_model_validator">Validator</label>
 			<label index="tx_superforms_domain_model_validator.type">Type</label>
 			<label index="tx_superforms_domain_model_validator.configuration">Configuration</label>

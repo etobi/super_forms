@@ -12,7 +12,6 @@ $TCA['tx_superforms_domain_model_processor'] = array(
 		'0' => array('showitem' => 'type, title'),
 		'Tx_SuperForms_Domain_Model_Processor_Email' => array('showitem' => 'type, configuration;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_mail'),
 		'Tx_SuperForms_Domain_Model_Processor_Database' => array('showitem' => 'type'),
-		'Tx_SuperForms_Domain_Model_Processor_File' => array('showitem' => 'type, configuration;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_file'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -69,7 +68,6 @@ $TCA['tx_superforms_domain_model_processor'] = array(
 					array('-',  '0'),
 					array('Email', 'Tx_SuperForms_Domain_Model_Processor_Email'),
 					array('Database', 'Tx_SuperForms_Domain_Model_Processor_Database'),
-					array('File', 'Tx_SuperForms_Domain_Model_Processor_File'),
 				),
 				'default' => '0'
 			)

@@ -31,12 +31,10 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 
 	const TYPE_EMAIL = 'Tx_SuperForms_Domain_Model_Processor_Email';
 	const TYPE_DATABASE = 'Tx_SuperForms_Domain_Model_Processor_Database';
-	const TYPE_FILE = 'Tx_SuperForms_Domain_Model_Processor_File';
 
 	protected $_serviceMap = array(
 		self::TYPE_EMAIL => 'Tx_SuperForms_Service_Processing_Email_EmailProcessor',
 		self::TYPE_DATABASE => 'Tx_SuperForms_Service_Processing_Database_DatabaseProcessor',
-		self::TYPE_FILE => 'Tx_SuperForms_Service_Processing_File_FileProcessor',
 	);
 
 	/**
