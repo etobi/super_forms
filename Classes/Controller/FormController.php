@@ -68,7 +68,6 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 				->setForm($form)
 				->setValues($formResponseArray);
 		$form->process($formResponse);
-		die();
 		$this->redirect('confirm');
 	}
 
