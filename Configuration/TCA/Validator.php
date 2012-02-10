@@ -98,7 +98,9 @@ $TCA['tx_superforms_domain_model_validator'] = array(
 		),
 		'field' => array(
 			'config' => array(
-				'type' => 'passthrough',
+				'type' => 'select',
+				'foreign_table' => 'tx_superforms_domain_model_field',
+				'foreign_field' => 'validators'
 			),
 		),
 	),

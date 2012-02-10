@@ -27,32 +27,25 @@
 /**
  * @package super_forms
  */
-class Tx_SuperForms_Hook_TceMainHook {
+abstract class Tx_SuperForms_Service_Processing_AbstractProcessor implements Tx_SuperForms_Service_Processing_ProcessorInterface {
 
 	/**
-	 * Construct the hook
+	 * @var \Tx_SuperForms_Domain_Model_Form
 	 */
-	public function __construct() {
-		$this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+	protected $form;
+
+	/**
+	 * @param \Tx_SuperForms_Domain_Model_Form $form
+	 */
+	public function setForm(Tx_SuperForms_Domain_Model_Form $form) {
+		$this->form = $form;
 	}
 
 	/**
-	 * @param string $status Status of the current operation, 'new' or 'update
-	 * @param string $table The table currently processing data for
-	 * @param string $id The record uid currently processing data for, [integer] or [string] (like 'NEW...')
-	 * @param array $fieldArray The field array of a record
-	 * @param t3lib_TCEmain $tce
-	 * @return void
+	 * @return \Tx_SuperForms_Domain_Model_Form
 	 */
-	public function processDatamap_afterDatabaseOperations($status, $table, $id, $fieldArray, $tce) {
-		if ($table === 'tx_superforms_domain_model_form'
-				&& ($status === 'new' || $status === 'update')) {
-			if ($status == 'new') {
-				$id = $tce->substNEWwithIDs[$id];
-			}
-			$tableService = $this->objectManager->get('Tx_SuperForms_Service_Processing_Database_TableService');
-			$tableService->compileTable($id);
-		}
+	public function getForm() {
+		return $this->form;
 	}
 }
 

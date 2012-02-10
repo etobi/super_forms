@@ -33,6 +33,12 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 	const TYPE_DATABASE = 'Tx_SuperForms_Domain_Model_Processor_Database';
 	const TYPE_FILE = 'Tx_SuperForms_Domain_Model_Processor_File';
 
+	protected $_serviceMap = array(
+		self::TYPE_EMAIL => 'Tx_SuperForms_Service_Processing_Email_EmailProcessor',
+		self::TYPE_DATABASE => 'Tx_SuperForms_Service_Processing_Database_DatabaseProcessor',
+		self::TYPE_FILE => 'Tx_SuperForms_Service_Processing_File_FileProcessor',
+	);
+
 	/**
 	 * @var string
 	 */
@@ -47,6 +53,16 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 	 * @var string
 	 */
 	protected $configuration;
+
+	/**
+	 * @var Tx_SuperForms_Domain_Model_Form
+	 */
+	protected $form;
+
+	/**
+	 * @var Tx_Extbase_Object_ObjectManager
+	 */
+	protected $_objectManager;
 
 	/**
 	 * @param string $title
@@ -89,5 +105,41 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 	public function getConfiguration() {
 		return $this->configuration;
 	}
+
+	/**
+	 * @return Tx_SuperForms_Service_Processing_ProcessorInterface
+	 */
+	public function getService() {
+		if ($this->_serviceMap[$this->getType()]) {
+			$service = $this->_objectManager->create($this->_serviceMap[$this->getType()]);
+			$service->setForm($this->getForm());
+			return $service;
+		} else {
+			return NULL;
+		}
+	}
+
+	/**
+	 * @param Tx_Extbase_Object_ObjectManager $objectManager
+	 * @return void
+	 */
+	public function injectObjectManager(Tx_Extbase_Object_ObjectManager $objectManager) {
+		$this->_objectManager = $objectManager;
+	}
+
+	/**
+	 * @param \Tx_SuperForms_Domain_Model_Form $form
+	 */
+	public function setForm($form) {
+		$this->form = $form;
+	}
+
+	/**
+	 * @return \Tx_SuperForms_Domain_Model_Form
+	 */
+	public function getForm() {
+		return $this->form;
+	}
+
 }
 ?>

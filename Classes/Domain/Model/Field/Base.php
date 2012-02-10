@@ -85,6 +85,11 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	protected $validationDependsOnField;
 
 	/**
+	 * @var Tx_SuperForms_Domain_Model_Form
+	 */
+	protected $form;
+
+	/**
 	 *
 	 */
 	public function __construct() {}
@@ -308,6 +313,20 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function getSize2() {
 		return $this->size2;
+	}
+
+	/**
+	 * @param \Tx_SuperForms_Domain_Model_Form $form
+	 */
+	public function setForm($form) {
+		$this->form = $form;
+	}
+
+	/**
+	 * @return \Tx_SuperForms_Domain_Model_Form
+	 */
+	public function getForm() {
+		return $this->form;
 	}
 }
 ?>

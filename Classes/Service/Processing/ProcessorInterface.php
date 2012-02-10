@@ -27,33 +27,7 @@
 /**
  * @package super_forms
  */
-class Tx_SuperForms_Hook_TceMainHook {
-
-	/**
-	 * Construct the hook
-	 */
-	public function __construct() {
-		$this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
-	}
-
-	/**
-	 * @param string $status Status of the current operation, 'new' or 'update
-	 * @param string $table The table currently processing data for
-	 * @param string $id The record uid currently processing data for, [integer] or [string] (like 'NEW...')
-	 * @param array $fieldArray The field array of a record
-	 * @param t3lib_TCEmain $tce
-	 * @return void
-	 */
-	public function processDatamap_afterDatabaseOperations($status, $table, $id, $fieldArray, $tce) {
-		if ($table === 'tx_superforms_domain_model_form'
-				&& ($status === 'new' || $status === 'update')) {
-			if ($status == 'new') {
-				$id = $tce->substNEWwithIDs[$id];
-			}
-			$tableService = $this->objectManager->get('Tx_SuperForms_Service_Processing_Database_TableService');
-			$tableService->compileTable($id);
-		}
-	}
+interface Tx_SuperForms_Service_Processing_ProcessorInterface {
+	public function process($formResponse);
 }
-
 ?>

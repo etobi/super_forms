@@ -148,7 +148,9 @@ $TCA['tx_superforms_domain_model_field'] = array(
 		),
 		'form' => array(
 			'config' => array(
-				'type' => 'passthrough',
+				'type' => 'select',
+				'foreign_table' => 'tx_superforms_domain_model_form',
+				'foreign_field' => 'processors'
 			),
 		),
 		'sorting' => array(

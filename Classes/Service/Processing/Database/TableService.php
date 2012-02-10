@@ -64,8 +64,14 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_HIDDEN => array('varchar(255)', 'DEFAULT \'\' NOT NULL'),
 	);
 
+	/**
+	 * @var array
+	 */
 	protected $fieldLists;
 
+	/**
+	 * @var array
+	 */
 	protected $queries = array(
 		'createTable' => 'CREATE TABLE `%s` (
 			uid int(11) NOT NULL auto_increment,
@@ -98,7 +104,7 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 	 * @param int $formUid
 	 * @return void
 	 */
-	public function process($formUid) {
+	public function compileTable($formUid) {
 		/** @var $form Tx_SuperForms_Domain_Model_Form */
 		$form = $this->formRepository->findByUid($formUid);
 		if ($form
@@ -120,21 +126,29 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 	 */
 	protected function createOrUpdateTableDefinition(Tx_SuperForms_Domain_Model_Form $form) {
 		if (!$form->getName()) return;
-		$tableName = $this->tablePrefix . $form->getName();
-		$tables = $this->db->admin_get_tables();
-		if (!isset($tables[$tableName])) {
-			$this->createBaseTable($tableName);
-			$this->updateTableFields($form, $tableName);
-		} elseif ($tables[$tableName]) {
-			$this->updateTableFields($form, $tableName);
+
+		if (!$this->tableExists($form)) {
+			$this->createBaseTable($form);
 		}
+		$this->updateTableFields($form);
+	}
+
+	/**
+	 * @param Tx_SuperForms_Domain_Model_Form $form
+	 * @return bool
+	 */
+	public function tableExists(Tx_SuperForms_Domain_Model_Form $form) {
+		$tableName = $this->getTableNameForForm($form);
+		$tables = $this->db->admin_get_tables();
+		return isset($tables[$tableName]);
 	}
 
 	/**
 	 * @param string $tableName
 	 * @return void
 	 */
-	protected function createBaseTable($tableName) {
+	protected function createBaseTable(Tx_SuperForms_Domain_Model_Form $form) {
+		$tableName = $this->getTableNameForForm($form);
 		$this->db->sql_query(sprintf($this->queries['createTable'], $tableName));
 	}
 
@@ -143,7 +157,8 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 	 * @param string $tableName
 	 * @return void
 	 */
-	protected function updateTableFields(Tx_SuperForms_Domain_Model_Form $form, $tableName) {
+	protected function updateTableFields(Tx_SuperForms_Domain_Model_Form $form) {
+		$tableName = $this->getTableNameForForm($form);
 		foreach($form->getFields() as $field) {
 			$this->addOrUpdateColumn($tableName, $field);
 		}
@@ -286,6 +301,13 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 		return $this->fieldLists[$tableName];
 	}
 
+	/**
+	 * @param $form
+	 * @return string
+	 */
+	public function getTableNameForForm(Tx_SuperForms_Domain_Model_Form $form) {
+		return $this->tablePrefix . $form->getName();
+	}
 }
 
 ?>

@@ -110,5 +110,17 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 		return $this->processors;
 	}
 
+	/**
+	 * @param array $formResponse
+	 * @return void
+	 */
+	public function process($formResponse) {
+		foreach($this->getProcessors() as $processor) {
+			$processorService = $processor->getService();
+			if ($processorService instanceof Tx_SuperForms_Service_Processing_ProcessorInterface) {
+				$processorService->process($formResponse);
+			}
+		}
+	}
 }
 ?>
