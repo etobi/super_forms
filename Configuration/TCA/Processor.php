@@ -10,9 +10,9 @@ $TCA['tx_superforms_domain_model_processor'] = array(
 	),
 	'types' => array(
 		'0' => array('showitem' => 'type, title'),
-		'Tx_SuperForms_Domain_Model_Processor_Email' => array('showitem' => 'type, title, configuration'),
-		'Tx_SuperForms_Domain_Model_Processor_Database' => array('showitem' => 'type, title'),
-		'Tx_SuperForms_Domain_Model_Processor_File' => array('showitem' => 'type, title, configuration'),
+		'Tx_SuperForms_Domain_Model_Processor_Email' => array('showitem' => 'type, configuration;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_mail'),
+		'Tx_SuperForms_Domain_Model_Processor_Database' => array('showitem' => 'type'),
+		'Tx_SuperForms_Domain_Model_Processor_File' => array('showitem' => 'type, configuration;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_file'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -74,21 +74,12 @@ $TCA['tx_superforms_domain_model_processor'] = array(
 				'default' => '0'
 			)
 		),
-		'title' => array(
-			'exclude' => 0,
-			'l10n_mode' => 'mergeIfNotBlank',
-			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.title',
-			'config' => array(
-				'type' => 'input',
-			)
-		),
 		'configuration' => array(
 			'exclude' => 0,
 			'l10n_mode' => 'exclude',
 			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration',
 			'config' => array(
-				'type' => 'text',
-				'rows' => 5,
+				'type' => 'input',
 			)
 		),
 		'form' => array(

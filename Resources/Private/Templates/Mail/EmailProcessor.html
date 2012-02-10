@@ -1,0 +1,12 @@
+Response to "{form.title} ({form.name})"
+
+Someone replied to "{form.title} ({form.name})" with:
+
+<table>
+	<f:for each="{response.values}" as="value" key="propertyName">
+		<tr>
+			<th>{propertyName}</th>
+			<td>{value}</td>
+		</tr>
+	</f:for>
+</table>

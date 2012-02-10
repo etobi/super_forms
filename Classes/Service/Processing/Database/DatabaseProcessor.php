@@ -66,8 +66,6 @@ class Tx_SuperForms_Service_Processing_Database_DatabaseProcessor extends Tx_Sup
 		$row = array();
 
 		foreach($formResponse->toArray() as $field => $value) {
-			if (empty($field)) continue;
-			if (is_array($value)) $value = implode(',', $value);
 			$row[$this->tableService->getColumnNameForField($field)] = $value;
 		}
 		$row = t3lib_div::array_merge_recursive_overrule(

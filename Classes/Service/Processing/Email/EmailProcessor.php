@@ -23,18 +23,33 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+
 /**
  * @package super_forms
  */
-class Tx_SuperForms_Domain_Model_Field_Checkbox extends Tx_SuperForms_Domain_Model_Field_Base {
+class Tx_SuperForms_Service_Processing_Email_EmailProcessor extends Tx_SuperForms_Service_Processing_AbstractProcessor {
 
 	/**
-	 * @param string|array $value
-	 * @return string
+	 * @var Tx_BumMtBase_Service_MailService
 	 */
-	public function processValue($value) {
-		if (is_array($value)) $value = implode(', ', $value);
-		return $value;
+	protected $mailService;
+
+	/**
+	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
+	 * @return void
+	 */
+	public function process(Tx_SuperForms_Domain_Model_Response $formResponse) {
+		$this->mailService->sendTo('foobar@lala.com', 'EmailProcessor', array('form' => $this->form, 'response' => $formResponse));
+	}
+
+	/**
+	 * @FIXME to no depend on BumMtBase
+	 *
+	 * @param Tx_BumMtBase_Service_MailService $mailService
+	 * @return void
+	 */
+	public function injectMailService(Tx_BumMtBase_Service_MailService $mailService) {
+		$this->mailService = $mailService;
 	}
 }
 

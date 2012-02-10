@@ -6,6 +6,10 @@ plugin.tx_superforms {
 	}
 
 	settings {
+		mailService {
+			templateRootPath = EXT:super_forms/Resources/Private/Templates/Mail/
+			sender = info@magicticket.ch
+		}
 	}
 
 	persistence {

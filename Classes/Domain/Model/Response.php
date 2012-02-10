@@ -54,17 +54,14 @@ class Tx_SuperForms_Domain_Model_Response {
 	}
 
 	/**
-	 * @param array $responseArray
+	 * @param array $values
 	 */
-	public function setValues($responseArray) {
-		$this->values = $responseArray;
-		unset($this->values['__referrer']);
-		unset($this->values['__hmac']);
+	public function setValues($values) {
 		foreach($this->form->getFields() as $field) {
 			$fieldName = $field->getName();
-			$value = $this->values[$fieldName];
-			$value = $field->processValue($value);
-			$this->values[$fieldName] = $value;
+			if ($fieldName) {
+				$this->values[$fieldName] = $field->processValue($values[$fieldName]);
+			}
 		}
 		return $this;
 	}
@@ -76,6 +73,9 @@ class Tx_SuperForms_Domain_Model_Response {
 		return $this->values;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function toArray() {
 		return $this->getValues();
 	}

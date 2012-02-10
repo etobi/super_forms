@@ -90,9 +90,8 @@ CREATE TABLE tx_superforms_domain_model_processor (
 	pid int(11) DEFAULT '0' NOT NULL,
 
 	form int(11) DEFAULT '0' NOT NULL,
-	title varchar(255) DEFAULT '' NOT NULL,
 	type varchar(255) DEFAULT '' NOT NULL,
-	configuration text NOT NULL,
+	configuration varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

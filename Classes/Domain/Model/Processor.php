@@ -130,7 +130,7 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 	/**
 	 * @param \Tx_SuperForms_Domain_Model_Form $form
 	 */
-	public function setForm($form) {
+	public function setForm(Tx_SuperForms_Domain_Model_Form $form) {
 		$this->form = $form;
 	}
 
