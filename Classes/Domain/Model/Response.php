@@ -36,7 +36,7 @@ class Tx_SuperForms_Domain_Model_Response {
 	/**
 	 * @var array
 	 */
-	protected $responseArray;
+	protected $values;
 
 	/**
 	 * @param \Tx_SuperForms_Domain_Model_Form $form
@@ -56,15 +56,15 @@ class Tx_SuperForms_Domain_Model_Response {
 	/**
 	 * @param array $responseArray
 	 */
-	public function setResponseArray($responseArray) {
-		$this->responseArray = $responseArray;
-		unset($this->responseArray['__referrer']);
-		unset($this->responseArray['__hmac']);
+	public function setValues($responseArray) {
+		$this->values = $responseArray;
+		unset($this->values['__referrer']);
+		unset($this->values['__hmac']);
 		foreach($this->form->getFields() as $field) {
 			$fieldName = $field->getName();
-			$value = $this->responseArray[$fieldName];
+			$value = $this->values[$fieldName];
 			$value = $field->processValue($value);
-			$this->responseArray[$fieldName] = $value;
+			$this->values[$fieldName] = $value;
 		}
 		return $this;
 	}
@@ -72,17 +72,53 @@ class Tx_SuperForms_Domain_Model_Response {
 	/**
 	 * @return array
 	 */
-	public function getResponseArray() {
-		return $this->responseArray;
+	public function getValues() {
+		return $this->values;
 	}
 
 	public function toArray() {
-		return $this->getResponseArray();
+		return $this->getValues();
 	}
-	
-	// TODO magic __call getFoobar
-	// TODO magic __call setFoobar
-	// TODO getProperties
+
+	/**
+	 * @return array
+	 */
+	public function getPropertyKeys() {
+		return array_keys($this->values);
+	}
+
+	/**
+	 * @param $propertyName
+	 * @return mixed
+	 */
+	public function get($propertyName) {
+		return $this->values[$propertyName];
+	}
+
+	/**
+	 * @param string $propertyName
+	 * @param mixed $value
+	 * @return void
+	 */
+	public function set($propertyName, $value) {
+		$this->values[$propertyName] = $value;
+	}
+
+	/**
+	 * @param string $name
+	 * @param array $arguments
+	 * @return mixed|void
+	 */
+	public function __call($name, $arguments) {
+		$propertyName = lcfirst(substr($name, 3));
+		if (substr($name, 0, 3) === 'get') {
+			return $this->get($propertyName);
+		}
+		if (substr($name, 0, 3) === 'set') {
+			$this->set($propertyName, $arguments[0]);
+		}
+	}
+
 }
 
 ?>
