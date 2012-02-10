@@ -10,7 +10,6 @@ $TCA['tx_superforms_domain_model_form'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form',
 		'label' => 'title',
-		'label_alt' => 'name',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
