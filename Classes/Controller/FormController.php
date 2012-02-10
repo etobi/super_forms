@@ -40,8 +40,21 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 	 * @param Tx_SuperForms_Domain_Model_Form $form
 	 * @return void
 	 */
-	public function showAction(Tx_SuperForms_Domain_Model_Form $form) {
-		$this->view->assign('form', $form);
+	public function showAction(Tx_SuperForms_Domain_Model_Form $form = NULL) {
+		if (!empty($form)) {
+			$formToDisplay = $form;
+		} elseif (!empty($this->settings['form'])) {
+			$formToDisplay = $this->objectManager
+				->get('Tx_SuperForms_Domain_Repository_FormRepository')
+					->findByUid((integer)$this->settings['form']);
+		} else {
+			throw new Exception(
+				'No Form given to display.',
+				1328865915
+			);
+		}
+
+		$this->view->assign('form', $formToDisplay);
 	}
 }
 ?>

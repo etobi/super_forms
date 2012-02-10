@@ -230,5 +230,46 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 		list($value, $label) = explode(':', $optionString);
 		return array('value' => $value, 'label' => $label, 'selected' => $selected);
 	}
+
+	/**
+	 * wraps the array to be processed in a select viewHelper
+	 *
+	 * @return array
+	 */
+	public function getSplittedOptionsForSelect() {
+		foreach ($this->getSplittedOptions() as $option) {
+			$options[$option['value']] = $option['label'];
+		}
+
+		return $options;
+	}
+
+	/**
+	 * wrapps the selected items the way select viewHelper needs them
+	 *
+	 * @return mixed string or array
+	 */
+	public function getSelectedOptionsForSelect() {
+		$selected = NULL;
+
+		foreach ($this->getSplittedOptions() as $option) {
+			if ($option['selected']) {
+					/**
+					 * if there is only one selected, we return a string.
+					 * if there are multiple selected, we convert and
+					 * return an array.
+					 */
+				if (is_string($selected)) {
+					$selected = array($selected, $option['value']);
+				} elseif (is_array($selected)) {
+					$selected[] = $option['value'];
+				} else {
+					$selected = $option['value'];
+				}
+			}
+		}
+
+		return $selected;
+	}
 }
 ?>

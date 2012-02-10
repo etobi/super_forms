@@ -27,6 +27,8 @@
 			<label index="tx_superforms_domain_model_validator.type">Type</label>
 			<label index="tx_superforms_domain_model_validator.configuration">Configuration</label>
 			<label index="tx_superforms_domain_model_validator.configuration2">Configuration</label>
+			<label index="FlexForm.Display.sheet.general">Generelles</label>
+			<label index="FlexForm.Display.form">Formular</label>
 		</languageKey>
 	</data>
 </T3locallang>
