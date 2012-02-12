@@ -257,11 +257,12 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 
 	/**
 	 * @param string $tableName
-	 * @param Tx_SuperForms_Domain_Model_Field_FieldInterface $field
+	 * @param Tx_SuperForms_Domain_Model_Field_FieldInterface|string $field
 	 * @return bool
 	 */
-	public function columnExists($tableName, Tx_SuperForms_Domain_Model_Field_FieldInterface $field) {
-		return $this->getColumnDefinitionForColumn($tableName, $this->getColumnNameForField($field)) !== NULL;
+	public function columnExists($tableName, $field) {
+		$fieldName = $field instanceof Tx_SuperForms_Domain_Model_Field_FieldInterface ? $field->getName() : $field;
+		return $this->getColumnDefinitionForColumn($tableName, $this->getColumnNameForField($fieldName)) !== NULL;
 	}
 
 	/**
