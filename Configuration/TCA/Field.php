@@ -21,7 +21,7 @@ $TCA['tx_superforms_domain_model_field'] = array(
 		'Tx_SuperForms_Domain_Model_Field_Radio'        => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.options, size, ' . $tempShowItems['validators']),
 		'Tx_SuperForms_Domain_Model_Field_Checkbox'     => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.options, size, ' . $tempShowItems['validators']),
 		'Tx_SuperForms_Domain_Model_Field_Select'       => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.options, ' . $tempShowItems['validators']),
-		'Tx_SuperForms_Domain_Model_Field_SubmitButton' => array('showitem' => $tempShowItems['general'] . ', value'),
+		'Tx_SuperForms_Domain_Model_Field_SubmitButton' => array('showitem' => $tempShowItems['general'] . ', name, value'),
 		'Tx_SuperForms_Domain_Model_Field_Textblock'    => array('showitem' => $tempShowItems['general'] . ', configuration;' . $tempLLL . '.value;;richtext[]'),
 		'Tx_SuperForms_Domain_Model_Field_Hidden'       => array('showitem' => 'type, name, configuration;' . $tempLLL . '.value'),
 		'Tx_SuperForms_Domain_Model_Field_Autofill'     => array('showitem' => 'type, name, mode'),
