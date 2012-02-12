@@ -54,7 +54,7 @@ class Tx_SuperForms_Service_Processing_Database_DatabaseProcessor extends Tx_Sup
 		if (!$this->tableService->tableExists($this->form)) return;
 
 		$tableName = $this->tableService->getTableNameForForm($this->form);
-		$row = $this->buildRow($formResponse);
+		$row = $this->buildRow($tableName, $formResponse);
 		$this->db->exec_INSERTquery($tableName, $row);
 	}
 
@@ -62,11 +62,14 @@ class Tx_SuperForms_Service_Processing_Database_DatabaseProcessor extends Tx_Sup
 	 * @param array $formResponse
 	 * @return array
 	 */
-	public function buildRow(Tx_SuperForms_Domain_Model_Response $formResponse) {
+	public function buildRow($tableName, Tx_SuperForms_Domain_Model_Response $formResponse) {
 		$row = array();
 
 		foreach($formResponse->toArray() as $field => $value) {
-			$row[$this->tableService->getColumnNameForField($field)] = $value;
+			if ($this->tableService->columnExists($tableName, $field)) {
+				$columnName = $this->tableService->getColumnNameForField($field);
+				$row[$columnName] = $value;
+			}
 		}
 		$row = t3lib_div::array_merge_recursive_overrule(
 			$row,

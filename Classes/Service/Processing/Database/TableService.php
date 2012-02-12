@@ -54,7 +54,6 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 	 */
 	protected $columnDefinitionMap = array(
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_BASE => FALSE,
-		Tx_SuperForms_Domain_Model_Field_Base::TYPE_SUBMITBUTTON => FALSE,
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_TEXTBLOCK => FALSE,
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_TEXTAREA => array('text', 'DEFAULT \'\' NOT NULL'),
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_TEXTFIELD => array('varchar(255)', 'DEFAULT \'\' NOT NULL'),
@@ -63,6 +62,7 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_SELECT => array('varchar(255)', 'DEFAULT \'\' NOT NULL'),
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_HIDDEN => array('varchar(255)', 'DEFAULT \'\' NOT NULL'),
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_AUTOFILL => array('varchar(255)', 'DEFAULT \'\' NOT NULL'),
+		Tx_SuperForms_Domain_Model_Field_Base::TYPE_SUBMITBUTTON => array('varchar(255)', 'DEFAULT \'\' NOT NULL'),
 	);
 
 	/**
@@ -260,7 +260,7 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 	 * @param Tx_SuperForms_Domain_Model_Field_FieldInterface $field
 	 * @return bool
 	 */
-	protected function columnExists($tableName, Tx_SuperForms_Domain_Model_Field_FieldInterface $field) {
+	public function columnExists($tableName, Tx_SuperForms_Domain_Model_Field_FieldInterface $field) {
 		return $this->getColumnDefinitionForColumn($tableName, $this->getColumnNameForField($field)) !== NULL;
 	}
 
