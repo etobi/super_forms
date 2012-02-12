@@ -5,13 +5,13 @@ if (!defined('TYPO3_MODE')) {
 
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
-	'Dev',
+	'Render',
 	array(
-		'Form' => 'index, show, process, confirm',
+		'Form' => 'render, show, process, confirm',
 	),
 	// non-cacheable actions
 	array(
-		'Form' => 'index, show, process, confirm',
+		'Form' => 'render, process',
 	)
 );
 
@@ -19,7 +19,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'Display',
 	array(
-		'Form' => 'show, process, confirm',
+			// @todo remove dev action!
+		'Form' => 'dev, display',
 	)
 );
 

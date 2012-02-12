@@ -32,8 +32,30 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 	/**
 	 * @return void
 	 */
-	public function indexAction() {
-		$this->view->assign('forms', $this->formRepository->findAll());
+	public function devAction() {
+		$this->view->assign('form', $this->formRepository->findByUid($this->settings['form']));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function displayAction() {
+		$this->view->assign('form', $this->formRepository->findByUid($this->settings['form']));
+	}
+
+	/**
+	 * handles standalone rendering and dispatches processing
+	 *
+	 * @param Tx_SuperForms_Domain_Model_Form $form
+	 * @param array $formResponseArray
+	 * @return string
+	 */
+	public function renderAction(Tx_SuperForms_Domain_Model_Form $form, $formResponseArray = NULL) {
+		if (!$formResponseArray) {
+			$this->forward('show');
+		} else {
+			$this->forward('process');
+		}
 	}
 
 	/**
@@ -41,20 +63,14 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 	 * @return void
 	 */
 	public function showAction(Tx_SuperForms_Domain_Model_Form $form = NULL) {
-		if (!empty($form)) {
-			$formToDisplay = $form;
-		} elseif (!empty($this->settings['form'])) {
-			$formToDisplay = $this->objectManager
-				->get('Tx_SuperForms_Domain_Repository_FormRepository')
-					->findByUid((integer)$this->settings['form']);
-		} else {
+		if (empty($form)) {
 			throw new Exception(
 				'No Form given to display.',
 				1328865915
 			);
 		}
 
-		$this->view->assign('form', $formToDisplay);
+		$this->view->assign('form', $form);
 	}
 
 	/**
@@ -68,7 +84,8 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 				->setForm($form)
 				->setValues($formResponseArray);
 		$form->process($formResponse);
-		$this->redirect('confirm');
+			// @todo fix this to be redirect! (have to redirect to actual url!)
+		$this->forward('confirm');
 	}
 
 	/**

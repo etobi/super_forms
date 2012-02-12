@@ -50,7 +50,7 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	protected $processors;
 
 	/**
-	 * 
+	 *
 	 */
 	public function __construct() {}
 
@@ -125,6 +125,23 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 				$processorService->process($formResponse);
 			}
 		}
+	}
+
+	/**
+	 * processes the form on the fly
+	 * is meant to be used inside other extensions
+	 *
+	 * @return string
+	 * @FIXME hand over form object!
+	 */
+	public function getToHtml() { //__toString() {
+		$_GET['tx_superforms_render']['form'] = $this->getUid();
+		return t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')
+			->create('Tx_Extbase_Core_Bootstrap')
+				->run('', array(
+					'extensionName' => 'SuperForms',
+					'pluginName' => 'Render'
+				));
 	}
 }
 ?>

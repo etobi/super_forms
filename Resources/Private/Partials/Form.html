@@ -1,5 +1,5 @@
 <h5>{form.title}</h5>
-<f:form action="process" fieldNamePrefix="tx_superforms_dev[formResponseArray]">
+<f:form action="render" fieldNamePrefix="tx_superforms_render[formResponseArray]" addQueryString="TRUE" noCacheHash="TRUE">
 	<input type="hidden" name="tx_superforms_dev[form]" value="{form.uid}" />
 	<f:for each="{form.fields}" as="field">
 		{field.label}:
