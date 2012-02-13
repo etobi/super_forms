@@ -47,14 +47,6 @@ class Tx_SuperForms_Service_Processing_Database_DatabaseProcessor extends Tx_Sup
 	}
 
 	/**
-	 * @param $configuration
-	 * @return void
-	 */
-	public function setConfiguration($configuration) {
-		// noop
-	}
-
-	/**
 	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
 	 * @return void
 	 */

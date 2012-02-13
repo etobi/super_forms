@@ -43,14 +43,6 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	}
 
 	/**
-	 * @param $configuration
-	 * @return void
-	 */
-	public function setConfiguration($configuration) {
-		$this->maxNumberOfParticipants = intval($configuration);
-	}
-
-	/**
 	 * @return bool
 	 */
 	public function isOnWaitinglist() {

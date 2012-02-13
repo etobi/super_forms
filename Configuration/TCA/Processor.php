@@ -10,9 +10,9 @@ $TCA['tx_superforms_domain_model_processor'] = array(
 	),
 	'types' => array(
 		'0' => array('showitem' => 'type, title'),
-		'Tx_SuperForms_Domain_Model_Processor_Email' => array('showitem' => 'type, configuration;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_mail'),
+		'Tx_SuperForms_Domain_Model_Processor_Email' => array('showitem' => 'type, configuration'),
 		'Tx_SuperForms_Domain_Model_Processor_Database' => array('showitem' => 'type'),
-		'Tx_SuperForms_Domain_Model_Processor_Waitinglist' => array('showitem' => 'type, configuration;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_waitinglist'),
+		'Tx_SuperForms_Domain_Model_Processor_Waitinglist' => array('showitem' => 'type, configuration'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -79,7 +79,12 @@ $TCA['tx_superforms_domain_model_processor'] = array(
 			'l10n_mode' => 'exclude',
 			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration',
 			'config' => array(
-				'type' => 'input',
+				'type' => 'flex',
+				'ds_pointerField' => 'type',
+				'ds' => array(
+					'Tx_SuperForms_Domain_Model_Processor_Email' => 'FILE:EXT:super_forms/Configuration/FlexForms/Processor_Email.xml',
+					'Tx_SuperForms_Domain_Model_Processor_Waitinglist' => 'FILE:EXT:super_forms/Configuration/FlexForms/Processor_Waitinglist.xml',
+				)
 			)
 		),
 		'form' => array(

@@ -40,14 +40,6 @@ class Tx_SuperForms_Service_Processing_Email_EmailProcessor extends Tx_SuperForm
 	protected $recipient;
 
 	/**
-	 * @param $configuration
-	 * @return void
-	 */
-	public function setConfiguration($configuration) {
-		$this->recipient = $configuration;
-	}
-
-	/**
 	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
 	 * @return void
 	 */

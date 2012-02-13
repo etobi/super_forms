@@ -1,0 +1,27 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<general>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:FlexForm.Display.sheet.general</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.form>
+						<TCEforms>
+							<label>LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:FlexForm.Display.form</label>
+							<config>
+								<type>select</type>
+								<foreign_table>tx_superforms_domain_model_form</foreign_table>
+								<maxitems>1</maxitems>
+							</config>
+						</TCEforms>
+					</settings.form>
+				</el>
+			</ROOT>
+		</general>
+	</sheets>
+</T3DataStructure>

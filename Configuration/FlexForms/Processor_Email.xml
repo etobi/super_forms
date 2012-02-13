@@ -1,0 +1,18 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<ROOT>
+		<el>
+			<settings.recipient>
+				<TCEforms>
+					<label>LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_recipient</label>
+					<config>
+						<type>input</type>
+						<size>30</size>
+					</config>
+				</TCEforms>
+			</settings.recipient>
+		</el>
+	</ROOT>
+</T3DataStructure>

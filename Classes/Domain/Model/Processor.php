@@ -65,6 +65,11 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 	protected $_objectManager;
 
 	/**
+	 * @var Tx_SuperForms_Service_Processing_ProcessorInterface
+	 */
+	protected $_service;
+
+	/**
 	 * @param string $title
 	 */
 	public function setTitle($title) {
@@ -111,10 +116,12 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 	 */
 	public function getService() {
 		if ($this->_serviceMap[$this->getType()]) {
-			$service = $this->_objectManager->create($this->_serviceMap[$this->getType()]);
-			$service->setForm($this->getForm());
-			$service->setConfiguration($this->getConfiguration());
-			return $service;
+			if ($this->_service === NULL) {
+				$this->_service = $this->_objectManager->create($this->_serviceMap[$this->getType()]);
+				$this->_service->setForm($this->getForm());
+				$this->_service->setConfiguration($this->getConfiguration());
+			}
+			return $this->_service;
 		} else {
 			return NULL;
 		}

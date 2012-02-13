@@ -42,6 +42,22 @@ abstract class Tx_SuperForms_Service_Processing_AbstractProcessor implements Tx_
 	}
 
 	/**
+	 * @param string $configuration
+	 * @return void
+	 */
+	public function setConfiguration($configuration) {
+		if (!empty($configuration)) {
+			$flexFormService = new Tx_Extbase_Service_FlexFormService();
+			$flexFormValues = $flexFormService->convertFlexFormContentToArray($configuration);
+			foreach($flexFormValues['settings'] as $key => $value) {
+				if (property_exists($this, $key)) {
+					$this->$key = $value;
+				}
+			}
+		}
+	}
+
+	/**
 	 * @return \Tx_SuperForms_Domain_Model_Form
 	 */
 	public function getForm() {
