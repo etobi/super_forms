@@ -28,6 +28,12 @@
  */
 class Tx_SuperForms_Domain_Model_Field_Textfield extends Tx_SuperForms_Domain_Model_Field_Base {
 
+	/**
+	 * @return int
+	 */
+	public function getSize() {
+		return intval($this->getSetting('size'));
+	}
 }
 
 ?>

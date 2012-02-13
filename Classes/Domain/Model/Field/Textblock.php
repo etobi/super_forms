@@ -32,17 +32,8 @@ class Tx_SuperForms_Domain_Model_Field_Textblock extends Tx_SuperForms_Domain_Mo
 	 * @return string
 	 */
 	public function getValue() {
-		return $this->getConfiguration();
+		return $this->getSetting('value');
 	}
-
-	/**
-	 * @param string $value
-	 * @return void
-	 */
-	public function setValue($value) {
-		$this->setConfiguration($value);
-	}
-
 }
 
 ?>

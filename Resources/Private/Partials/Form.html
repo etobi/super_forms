@@ -2,7 +2,8 @@
 <f:form action="render" fieldNamePrefix="tx_superforms_render[formResponseArray]" addQueryString="TRUE" noCacheHash="TRUE">
 	<input type="hidden" name="tx_superforms_dev[form]" value="{form.uid}" />
 	<f:for each="{form.fields}" as="field">
-		{field.label}:
+		<f:if condition="{field.label}" then="{field.label}:" />
 		<f:render partial="Field_{field.shortType}" arguments="{field: field}" />
+		<br/><br/>
 	</f:for>
 </f:form>

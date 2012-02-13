@@ -16,15 +16,15 @@ $TCA['tx_superforms_domain_model_field'] = array(
 	),
 	'types' => array(
 		'Tx_SuperForms_Domain_Model_Field_Base'         => array('showitem' => 'type'),
-		'Tx_SuperForms_Domain_Model_Field_Textfield'    => array('showitem' => $tempShowItems['general'] . ', name, value, size, ' . $tempShowItems['validators']),
-		'Tx_SuperForms_Domain_Model_Field_Textarea'     => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.value, size;' . $tempLLL . '.size_cols, size2, ' . $tempShowItems['validators']),
-		'Tx_SuperForms_Domain_Model_Field_Radio'        => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.options, size, ' . $tempShowItems['validators']),
-		'Tx_SuperForms_Domain_Model_Field_Checkbox'     => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.options, size, ' . $tempShowItems['validators']),
-		'Tx_SuperForms_Domain_Model_Field_Select'       => array('showitem' => $tempShowItems['general'] . ', name, configuration;' . $tempLLL . '.options, ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Textfield'    => array('showitem' => $tempShowItems['general'] . ', name, value, configuration, ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Textarea'     => array('showitem' => $tempShowItems['general'] . ', name, configuration, ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Radio'        => array('showitem' => $tempShowItems['general'] . ', name, configuration, ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Checkbox'     => array('showitem' => $tempShowItems['general'] . ', name, configuration, ' . $tempShowItems['validators']),
+		'Tx_SuperForms_Domain_Model_Field_Select'       => array('showitem' => $tempShowItems['general'] . ', name, configuration, ' . $tempShowItems['validators']),
 		'Tx_SuperForms_Domain_Model_Field_SubmitButton' => array('showitem' => $tempShowItems['general'] . ', name, value'),
-		'Tx_SuperForms_Domain_Model_Field_Textblock'    => array('showitem' => $tempShowItems['general'] . ', configuration;' . $tempLLL . '.value;;richtext[]'),
-		'Tx_SuperForms_Domain_Model_Field_Hidden'       => array('showitem' => 'type, name, configuration;' . $tempLLL . '.value'),
-		'Tx_SuperForms_Domain_Model_Field_Autofill'     => array('showitem' => 'type, name, mode'),
+		'Tx_SuperForms_Domain_Model_Field_Textblock'    => array('showitem' => $tempShowItems['general'] . ', configuration'),
+		'Tx_SuperForms_Domain_Model_Field_Hidden'       => array('showitem' => 'type, name, value'),
+		'Tx_SuperForms_Domain_Model_Field_Autofill'     => array('showitem' => 'type, name, configuration'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -120,41 +120,24 @@ $TCA['tx_superforms_domain_model_field'] = array(
 		'configuration' => array(
 			'exclude' => 0,
 			'l10n_mode' => 'exclude',
-			'label' => '' . $tempLLL . '.configuration',
+			'label' => $tempLLL . '.configuration',
 			'config' => array(
-				'type' => 'text',
-				'rows' => 5,
+				'type' => 'flex',
+				'ds_pointerField' => 'type',
+				'ds' => array(
+					'Tx_SuperForms_Domain_Model_Field_Textfield' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/Textfield.xml',
+					'Tx_SuperForms_Domain_Model_Field_Textarea' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/Textarea.xml',
+					'Tx_SuperForms_Domain_Model_Field_Radio' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/Radio.xml',
+					'Tx_SuperForms_Domain_Model_Field_Checkbox' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/Checkbox.xml',
+					'Tx_SuperForms_Domain_Model_Field_Select' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/Select.xml',
+					'Tx_SuperForms_Domain_Model_Field_SubmitButton' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/SubmitButton.xml',
+					'Tx_SuperForms_Domain_Model_Field_Textblock' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/Textblock.xml',
+					'Tx_SuperForms_Domain_Model_Field_Hidden' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/Hidden.xml',
+					'Tx_SuperForms_Domain_Model_Field_Autofill' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/Autofill.xml',
+				)
 			)
 		),
-		'size' => array(
-			'exclude' => 0,
-			'l10n_mode' => 'exclude',
-			'label' => '' . $tempLLL . '.size',
-			'config' => array(
-				'type' => 'input',
-				'eval' => 'int',
-				'size' => 5,
-				'default' => 30,
-			)
-		),
-		'size2' => array(
-			'exclude' => 0,
-			'l10n_mode' => 'exclude',
-			'label' => '' . $tempLLL . '.size2',
-			'config' => array(
-				'type' => 'input',
-				'eval' => 'int',
-				'size' => 5,
-				'default' => 7,
-			)
-		),
-		'mode' => array(
-			'config' => array(
-				'type' => 'select',
-				'itemsProcFunc' => 'Tx_SuperForms_Hook_TceFormsHook->getModeOptions',
-				'size' => 1
-			)
-		),
+
 		'form' => array(
 			'config' => array(
 				'type' => 'select',

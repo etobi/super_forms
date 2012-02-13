@@ -92,7 +92,6 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 	 * @return string
 	 */
 	public function confirmAction() {
-		return 'TODO'; // TODO
 	}
 }
 ?>

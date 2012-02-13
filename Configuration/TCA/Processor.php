@@ -82,8 +82,8 @@ $TCA['tx_superforms_domain_model_processor'] = array(
 				'type' => 'flex',
 				'ds_pointerField' => 'type',
 				'ds' => array(
-					'Tx_SuperForms_Domain_Model_Processor_Email' => 'FILE:EXT:super_forms/Configuration/FlexForms/Processor_Email.xml',
-					'Tx_SuperForms_Domain_Model_Processor_Waitinglist' => 'FILE:EXT:super_forms/Configuration/FlexForms/Processor_Waitinglist.xml',
+					'Tx_SuperForms_Domain_Model_Processor_Email' => 'FILE:EXT:super_forms/Configuration/FlexForms/Processor/Email.xml',
+					'Tx_SuperForms_Domain_Model_Processor_Waitinglist' => 'FILE:EXT:super_forms/Configuration/FlexForms/Processor/Waitinglist.xml',
 				)
 			)
 		),

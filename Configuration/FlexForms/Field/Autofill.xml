@@ -1,0 +1,19 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<ROOT>
+		<el>
+			<settings.mode>
+				<TCEforms>
+					<label>Mode</label>
+					<config>
+						<type>select</type>
+						<itemsProcFunc>Tx_SuperForms_Hook_TceFormsHook->getModeOptions</itemsProcFunc>
+						<size>1</size>
+					</config>
+				</TCEforms>
+			</settings.mode>
+		</el>
+	</ROOT>
+</T3DataStructure>

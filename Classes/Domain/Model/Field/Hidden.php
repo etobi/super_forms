@@ -27,22 +27,6 @@
  * @package super_forms
  */
 class Tx_SuperForms_Domain_Model_Field_Hidden extends Tx_SuperForms_Domain_Model_Field_Base {
-
-	/**
-	 * @return string
-	 */
-	public function getValue() {
-		return $this->getConfiguration();
-	}
-
-	/**
-	 * @param string $value
-	 * @return void
-	 */
-	public function setValue($value) {
-		$this->setConfiguration($value);
-	}
-
 }
 
 ?>

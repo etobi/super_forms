@@ -1,0 +1,20 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<ROOT>
+		<el>
+			<settings.maxNumberOfParticipants>
+				<TCEforms>
+					<label>LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_maxNumberOfParticipants</label>
+					<config>
+						<type>input</type>
+						<eval>int</eval>
+						<size>5</size>
+						<default>999</default>
+					</config>
+				</TCEforms>
+			</settings.maxNumberOfParticipants>
+		</el>
+	</ROOT>
+</T3DataStructure>

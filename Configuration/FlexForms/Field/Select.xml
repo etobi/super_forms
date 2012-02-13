@@ -1,0 +1,29 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<ROOT>
+		<el>
+			<settings.options>
+				<TCEforms>
+					<label><![CDATA[Options (One Option per Line. Separate value and label by ":")]]></label>
+					<config>
+						<type>text</type>
+						<cols>30</cols>
+						<rows>7</rows>
+					</config>
+				</TCEforms>
+			</settings.options>
+			<settings.size>
+				<TCEforms>
+					<label>Size</label>
+					<config>
+						<type>input</type>
+						<size>5</size>
+						<eval>int</eval>
+					</config>
+				</TCEforms>
+			</settings.size>
+		</el>
+	</ROOT>
+</T3DataStructure>

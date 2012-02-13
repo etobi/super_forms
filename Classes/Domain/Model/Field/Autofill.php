@@ -70,6 +70,13 @@ class Tx_SuperForms_Domain_Model_Field_Autofill extends Tx_SuperForms_Domain_Mod
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getMode() {
+		return $this->getSetting('mode');
+	}
+
+	/**
 	 * @static
 	 * @return array
 	 */

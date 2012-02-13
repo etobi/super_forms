@@ -58,22 +58,7 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * @var string
 	 */
-	protected $mode;
-
-	/**
-	 * @var string
-	 */
 	protected $configuration;
-
-	/**
-	 * @var int
-	 */
-	protected $size;
-
-	/**
-	 * @var int
-	 */
-	protected $size2;
 
 	/**
 	 * @var string
@@ -94,6 +79,11 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	 * @var Tx_SuperForms_Domain_Model_Form
 	 */
 	protected $form;
+
+	/**
+	 * @var Tx_Extbase_Service_FlexFormService
+	 */
+	protected $_flexformService;
 
 	/**
 	 *
@@ -195,7 +185,8 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	 * @return boolean
 	 */
 	public function getHasMultipleOptions() {
-		return (count(explode(PHP_EOL, $this->configuration)) > 1);
+		$optionsString = $this->getSetting('options');
+		return (count(explode(PHP_EOL, $optionsString)) > 1);
 	}
 
 	/**
@@ -204,27 +195,26 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	 * @return array
 	 */
 	public function getSplittedOptions() {
-		if (empty($this->configuration)) {
+		$optionsString = trim($this->getSetting('options'));
+		if (empty($optionsString)) {
 			return array();
 		}
-
 		$options = array();
-		foreach (explode(PHP_EOL, $this->configuration) as $option) {
+		foreach (explode(PHP_EOL, $optionsString) as $option) {
 			$options[] = $this->getSplittedOption($option);
 		}
-
 		return $options;
 	}
 
 	/**
 	 * splits an option string into parameters for select, radio and checkbox
 	 *
-	 * @param string $optionString if nothing specified, $this->configuration is used
+	 * @param string $optionString if nothing specified, options from settings array is used
 	 * @return array
 	 */
 	public function getSplittedOption($optionString = '') {
 		if (empty($optionString)) {
-			$optionString = $this->configuration;
+			$optionString = trim($this->getSetting('options'));
 		}
 
 		$selected = FALSE;
@@ -233,7 +223,6 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 			$selected = TRUE;
 			$optionString = substr($optionString, 1);
 		}
-
 		list($value, $label) = explode(':', $optionString);
 		return array('value' => $value, 'label' => $label, 'selected' => $selected);
 	}
@@ -247,7 +236,6 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 		foreach ($this->getSplittedOptions() as $option) {
 			$options[$option['value']] = $option['label'];
 		}
-
 		return $options;
 	}
 
@@ -294,31 +282,23 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	}
 
 	/**
-	 * @param int $size
+	 * @return array
 	 */
-	public function setSize($size) {
-		$this->size = $size;
+	public function getSettings() {
+		if ($this->_settings === NULL) {
+			$flexformValues = $this->_flexformService->convertFlexFormContentToArray($this->getConfiguration());
+			$this->_settings = $flexformValues['settings'];
+		}
+		return $this->_settings;
 	}
 
 	/**
-	 * @return int
+	 * @param string $key
+	 * @return mixed
 	 */
-	public function getSize() {
-		return $this->size;
-	}
-
-	/**
-	 * @param int $size2
-	 */
-	public function setSize2($size2) {
-		$this->size2 = $size2;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getSize2() {
-		return $this->size2;
+	protected function getSetting($key) {
+		$settings = $this->getSettings();
+		return $settings[$key];
 	}
 
 	/**
@@ -352,17 +332,11 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	}
 
 	/**
-	 * @param string $mode
+	 * @param Tx_Extbase_Service_FlexFormService $flexformService
+	 * @return void
 	 */
-	public function setMode($mode) {
-		$this->mode = $mode;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getMode() {
-		return $this->mode;
+	public function injectFlexFormService(Tx_Extbase_Service_FlexFormService $flexformService) {
+		$this->_flexformService = $flexformService;
 	}
 }
 ?>

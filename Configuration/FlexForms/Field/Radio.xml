@@ -1,0 +1,19 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<ROOT>
+		<el>
+			<settings.options>
+				<TCEforms>
+					<label>Options</label>
+					<config>
+						<type>text</type>
+						<cols>30</cols>
+						<rows>7</rows>
+					</config>
+				</TCEforms>
+			</settings.options>
+		</el>
+	</ROOT>
+</T3DataStructure>
