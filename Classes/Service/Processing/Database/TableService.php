@@ -138,8 +138,8 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 	 * @param Tx_SuperForms_Domain_Model_Form $form
 	 * @return bool
 	 */
-	public function tableExists(Tx_SuperForms_Domain_Model_Form $form) {
-		$tableName = $this->getTableNameForForm($form);
+	public function tableExists($form) {
+		$tableName = $form instanceof Tx_SuperForms_Domain_Model_Form ? $this->getTableNameForForm($form) : $form;
 		$tables = $this->db->admin_get_tables();
 		return isset($tables[$tableName]);
 	}
@@ -261,6 +261,7 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 	 * @return bool
 	 */
 	public function columnExists($tableName, $field) {
+		if (!$this->tableExists($tableName)) return FALSE;
 		$fieldName = $field instanceof Tx_SuperForms_Domain_Model_Field_FieldInterface ? $field->getName() : $field;
 		return $this->getColumnDefinitionForColumn($tableName, $this->getColumnNameForField($fieldName)) !== NULL;
 	}
