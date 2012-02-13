@@ -31,10 +31,12 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 
 	const TYPE_EMAIL = 'Tx_SuperForms_Domain_Model_Processor_Email';
 	const TYPE_DATABASE = 'Tx_SuperForms_Domain_Model_Processor_Database';
+	const TYPE_WAITINGLIST = 'Tx_SuperForms_Domain_Model_Processor_Waitinglist';
 
 	protected $_serviceMap = array(
 		self::TYPE_EMAIL => 'Tx_SuperForms_Service_Processing_Email_EmailProcessor',
 		self::TYPE_DATABASE => 'Tx_SuperForms_Service_Processing_Database_DatabaseProcessor',
+		self::TYPE_WAITINGLIST => 'Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor',
 	);
 
 	/**
@@ -111,18 +113,11 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 		if ($this->_serviceMap[$this->getType()]) {
 			$service = $this->_objectManager->create($this->_serviceMap[$this->getType()]);
 			$service->setForm($this->getForm());
+			$service->setConfiguration($this->getConfiguration());
 			return $service;
 		} else {
 			return NULL;
 		}
-	}
-
-	/**
-	 * @param Tx_Extbase_Object_ObjectManager $objectManager
-	 * @return void
-	 */
-	public function injectObjectManager(Tx_Extbase_Object_ObjectManager $objectManager) {
-		$this->_objectManager = $objectManager;
 	}
 
 	/**
@@ -137,6 +132,25 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 	 */
 	public function getForm() {
 		return $this->form;
+	}
+
+	/**
+	 * @param $formResponse
+	 * @return void
+	 */
+	public function process($formResponse) {
+		$processorService = $this->getService();
+		if ($processorService instanceof Tx_SuperForms_Service_Processing_ProcessorInterface) {
+			$processorService->process($formResponse);
+		}
+	}
+
+	/**
+	 * @param Tx_Extbase_Object_ObjectManager $objectManager
+	 * @return void
+	 */
+	public function injectObjectManager(Tx_Extbase_Object_ObjectManager $objectManager) {
+		$this->_objectManager = $objectManager;
 	}
 
 }

@@ -65,6 +65,10 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Field_Base>
 	 */
 	public function getFields() {
+			// TODO remove dirty hack
+		foreach($this->fields as $field) {
+			$field->setForm($this);
+		}
 		return $this->fields;
 	}
 
@@ -107,7 +111,24 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	 * @return \Tx_Extbase_Persistence_ObjectStorage
 	 */
 	public function getProcessors() {
+		foreach($this->processors as $processor) {
+			// TODO FIXME der Processor bekommt das form property nicht gemappt. Keine Ahnung wieso :-/
+			$processor->setForm($this);
+		}
 		return $this->processors;
+	}
+
+	/**
+	 * @param string $type
+	 * @return Tx_SuperForms_Domain_Model_Processor
+	 */
+	public function getProcessorByType($type) {
+		foreach ($this->getProcessors() as $processor) {
+			if ($processor->getType() === $type) {
+				return $processor;
+			}
+		}
+		return NULL;
 	}
 
 	/**
@@ -116,14 +137,7 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	 */
 	public function process(Tx_SuperForms_Domain_Model_Response $formResponse) {
 		foreach($this->getProcessors() as $processor) {
-
-			// TODO FIXME der Processor bekommt das form property nicht gemappt. Keine Ahnung wieso :-/
-			$processor->setForm($this);
-
-			$processorService = $processor->getService();
-			if ($processorService instanceof Tx_SuperForms_Service_Processing_ProcessorInterface) {
-				$processorService->process($formResponse);
-			}
+			$processor->process($formResponse);
 		}
 	}
 

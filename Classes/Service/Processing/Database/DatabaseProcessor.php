@@ -47,6 +47,14 @@ class Tx_SuperForms_Service_Processing_Database_DatabaseProcessor extends Tx_Sup
 	}
 
 	/**
+	 * @param $configuration
+	 * @return void
+	 */
+	public function setConfiguration($configuration) {
+		// noop
+	}
+
+	/**
 	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
 	 * @return void
 	 */
@@ -80,6 +88,12 @@ class Tx_SuperForms_Service_Processing_Database_DatabaseProcessor extends Tx_Sup
 		);
 
 		return $row;
+	}
+
+	public function getRecordCount() {
+		$tableName = $this->tableService->getTableNameForForm($this->form);
+		$row = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows('count(*) as count', $tableName, 'deleted = 0');
+		return intval($row[0]['count']);
 	}
 
 	/**

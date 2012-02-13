@@ -49,7 +49,24 @@ class Tx_SuperForms_Domain_Model_Field_Autofill extends Tx_SuperForms_Domain_Mod
 			case 'remoteIp':
 				return $_SERVER['REMOTE_ADDR'];
 				break;
+			case 'waiting':
+				return $this->isOnWaitinglist() ? 1 : 0;
+				break;
 		}
+		return '';
+	}
+
+	/**
+	 * @var Tx_SuperForms_Service_Processing_Database_TableService
+	 */
+	protected $_tableService;
+
+	/**
+	 * @return bool
+	 */
+	protected function isOnWaitinglist() {
+		$waitinglistProcessor = $this->getForm()->getProcessorByType(Tx_SuperForms_Domain_Model_Processor::TYPE_WAITINGLIST);
+		return $waitinglistProcessor ? $waitinglistProcessor->getService()->isOnWaitinglist() : FALSE;
 	}
 
 	/**
@@ -63,7 +80,16 @@ class Tx_SuperForms_Domain_Model_Field_Autofill extends Tx_SuperForms_Domain_Mod
 			array('Current FEUser', 'fe_user'),
 			array('Current Page UID', 'page'),
 			array('IP Address', 'remoteIp'),
+			array('Participant/Waiting list (needs WaitingList and Database Processor)', 'waiting'),
 		);
+	}
+
+	/**
+	 * @param Tx_SuperForms_Service_Processing_Database_TableService $tableService
+	 * @return void
+	 */
+	public function injectTableService(Tx_SuperForms_Service_Processing_Database_TableService $tableService) {
+		$this->_tableService = $tableService;
 	}
 }
 

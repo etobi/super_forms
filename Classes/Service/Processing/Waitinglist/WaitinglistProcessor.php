@@ -27,45 +27,37 @@
 /**
  * @package super_forms
  */
-class Tx_SuperForms_Service_Processing_Email_EmailProcessor extends Tx_SuperForms_Service_Processing_AbstractProcessor {
+class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends Tx_SuperForms_Service_Processing_AbstractProcessor {
 
 	/**
-	 * @var Tx_BumMtBase_Service_MailService
+	 * @var int
 	 */
-	protected $mailService;
-
-	/**
-	 * @var string
-	 */
-	protected $recipient;
-
-	/**
-	 * @param $configuration
-	 * @return void
-	 */
-	public function setConfiguration($configuration) {
-		$this->recipient = $configuration;
-	}
+	protected $maxNumberOfParticipants = 5;
 
 	/**
 	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
 	 * @return void
 	 */
 	public function process(Tx_SuperForms_Domain_Model_Response $formResponse) {
-		$this->mailService->sendTo($this->recipient,
-			'EmailProcessor',
-			array('form' => $this->form, 'response' => $formResponse)
-		);
+		// noop
 	}
 
 	/**
-	 * @FIXME to no depend on BumMtBase
-	 *
-	 * @param Tx_BumMtBase_Service_MailService $mailService
+	 * @param $configuration
 	 * @return void
 	 */
-	public function injectMailService(Tx_BumMtBase_Service_MailService $mailService) {
-		$this->mailService = $mailService;
+	public function setConfiguration($configuration) {
+		$this->maxNumberOfParticipants = intval($configuration);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isOnWaitinglist() {
+		$databaseProcessor = $this->getForm()->getProcessorByType(Tx_SuperForms_Domain_Model_Processor::TYPE_DATABASE);
+		return $databaseProcessor ?
+				($databaseProcessor->getService()->getRecordCount() >= $this->maxNumberOfParticipants) :
+				FALSE;
 	}
 }
 

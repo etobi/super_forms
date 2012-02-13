@@ -34,5 +34,12 @@ interface Tx_SuperForms_Service_Processing_ProcessorInterface {
 	 * @return void
 	 */
 	public function process(Tx_SuperForms_Domain_Model_Response $formResponse);
+
+	/**
+	 * @abstract
+	 * @param string $configuration
+	 * @return void
+	 */
+	public function setConfiguration($configuration);
 }
 ?>
