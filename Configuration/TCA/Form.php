@@ -71,6 +71,8 @@ $TCA['tx_superforms_domain_model_form'] = array(
 			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.name',
 			'config' => array(
 				'type' => 'input',
+				'size' => 10,
+				'max' => 10,
 				'eval' => 'required,alphanum,unique'
 			)
 		),
