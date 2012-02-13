@@ -142,6 +142,24 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	}
 
 	/**
+	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
+	 * @return Tx_SuperForms_Validation_Result
+	 */
+	public function validate(Tx_SuperForms_Domain_Model_Response $formResponse) {
+		$validationResult = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->create('Tx_SuperForms_Validation_Result');
+		foreach($this->getFields() as $field) {
+			$fieldValidationResults = $field->validate($formResponse->get($field->getName()));
+			if ($fieldValidationResults->hasErrors()) {
+				$validationResult->addErrors(
+					$field->getName(),
+					$fieldValidationResults->getErrors()
+				);
+			}
+		}
+		return $validationResult;
+	}
+
+	/**
 	 * processes the form on the fly
 	 * is meant to be used inside other extensions
 	 *

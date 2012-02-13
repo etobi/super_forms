@@ -331,6 +331,16 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 		return NULL;
 	}
 
+	public function validate($value) {
+		$validationResult = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->create('Tx_SuperForms_Validation_Result');
+		foreach ($this->getValidators() as $validator) {
+			if (!$validator->isValid($value)) {
+				$validationResult->addError($this->getName(), $validator->getMessage(), $validator->getCode());
+			}
+		}
+		return $validationResult;
+	}
+
 	/**
 	 * @param Tx_Extbase_Service_FlexFormService $flexformService
 	 * @return void

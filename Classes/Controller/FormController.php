@@ -59,10 +59,12 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 	}
 
 	/**
-	 * @param Tx_SuperForms_Domain_Model_Form $form
+	 * @throws Exception
+	 * @param null|Tx_SuperForms_Domain_Model_Form $form
+	 * @param null|Tx_SuperForms_Domain_Model_Response $formResponse
 	 * @return void
 	 */
-	public function showAction(Tx_SuperForms_Domain_Model_Form $form = NULL) {
+	public function showAction(Tx_SuperForms_Domain_Model_Form $form = NULL, Tx_SuperForms_Domain_Model_Response $formResponse = NULL) {
 		if (empty($form)) {
 			throw new Exception(
 				'No Form given to display.',
@@ -71,6 +73,7 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 		}
 
 		$this->view->assign('form', $form);
+		$this->view->assign('formResponse', $formResponse);
 	}
 
 	/**
@@ -79,13 +82,19 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 	 * @return void
 	 */
 	public function processAction(Tx_SuperForms_Domain_Model_Form $form, $formResponseArray) {
-		$formResponse = $this->objectManager
-				->create('Tx_SuperForms_Domain_Model_Response')
-				->setForm($form)
-				->setValues($formResponseArray);
-		$form->process($formResponse);
-			// @todo fix this to be redirect! (have to redirect to actual url!)
-		$this->forward('confirm');
+		$formResponse = $this->objectManager->create('Tx_SuperForms_Domain_Model_Response');
+		/** @var $formResponse Tx_SuperForms_Domain_Model_Response */
+		$formResponse->setForm($form)->setValues($formResponseArray);
+		$validationResult = $form->validate($formResponse);
+
+		if (!$validationResult->hasErrors()) {
+			$form->process($formResponse);
+				// @todo fix this to be redirect! (have to redirect to actual url!)
+			$this->forward('confirm');
+		} else {
+				// TODO
+			$this->forward('show', NULL, NULL, array('form' => $form, 'formResponse' => $formResponse, 'validationResult' => $validationResult));
+		}
 	}
 
 	/**
