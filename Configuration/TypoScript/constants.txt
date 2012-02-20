@@ -1,12 +1,4 @@
 plugin.tx_superforms {
-	view {
-		# cat=plugin.tx_superforms/file; type=string; label=Path to template root (FE)
-		templateRootPath = EXT:super_forms/Resources/Private/Templates/
-		# cat=plugin.tx_superforms/file; type=string; label=Path to template partials (FE)
-		partialRootPath = EXT:super_forms/Resources/Private/Partials/
-		# cat=plugin.tx_superforms/file; type=string; label=Path to template layouts (FE)
-		layoutRootPath = EXT:super_forms/Resources/Private/Layouts/
-	}
 	persistence {
 		# cat=plugin.tx_superforms//a; type=int+; label=Default storage PID
 		storagePid =
