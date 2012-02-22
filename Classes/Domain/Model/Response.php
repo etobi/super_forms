@@ -27,7 +27,12 @@
 /**
  * @package super_forms
  */
-class Tx_SuperForms_Domain_Model_Response {
+class Tx_SuperForms_Domain_Model_Response extends Tx_Extbase_DomainObject_AbstractEntity {
+
+	public function __construct() {
+		// even if i don't do anything, please let me stay!
+	}
+
 	/**
 	 * @var Tx_SuperForms_Domain_Model_Form
 	 */

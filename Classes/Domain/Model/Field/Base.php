@@ -332,11 +332,12 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	}
 
 	/**
-	 * @param Tx_SuperForms_Domain_Model_Response $value
+	 * @param Tx_SuperForms_Domain_Model_Response $response
 	 * @return Tx_SuperForms_Validation_Result
 	 */
 	public function validate(Tx_SuperForms_Domain_Model_Response $response) {
 		$validationResult = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->create('Tx_SuperForms_Validation_Result');
+
 		if ($this->validationDependsOnField && !$this->validationDependsOnField->hasResponseValue($response)) {
 			return $validationResult;
 		}

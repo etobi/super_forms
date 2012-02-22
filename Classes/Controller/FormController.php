@@ -47,11 +47,11 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 	 * handles standalone rendering and dispatches processing
 	 *
 	 * @param Tx_SuperForms_Domain_Model_Form $form
-	 * @param array $formResponseArray
+	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
 	 * @return string
 	 */
-	public function renderAction(Tx_SuperForms_Domain_Model_Form $form, $formResponseArray = NULL) {
-		if (!$formResponseArray) {
+	public function renderAction(Tx_SuperForms_Domain_Model_Form $form, Tx_SuperForms_Domain_Model_Response $formResponse = NULL) {
+		if (!$formResponse) {
 			$this->forward('show');
 		} else {
 			$this->forward('process');
@@ -60,11 +60,12 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 
 	/**
 	 * @throws Exception
-	 * @param null|Tx_SuperForms_Domain_Model_Form $form
-	 * @param null|Tx_SuperForms_Domain_Model_Response $formResponse
+	 * @param Tx_SuperForms_Domain_Model_Form $form
+	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
+	 * @param Tx_SuperForms_Validation_Result $validationResult
 	 * @return void
 	 */
-	public function showAction(Tx_SuperForms_Domain_Model_Form $form = NULL, Tx_SuperForms_Domain_Model_Response $formResponse = NULL) {
+	public function showAction(Tx_SuperForms_Domain_Model_Form $form = NULL, Tx_SuperForms_Domain_Model_Response $formResponse = NULL, $validationResult = NULL) {
 		if (empty($form)) {
 			throw new Exception(
 				'No Form given to display.',
@@ -73,7 +74,8 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 		}
 
 		$this->view->assign('form', $form);
-		$this->view->assign('formResponse', $formResponse);
+		$this->view->assign('formResponse', ($formResponse ?: $this->objectManager->create('Tx_SuperForms_Domain_Model_Response')));
+		$this->view->assign('validationResult', $validationResult);
 	}
 
 	/**
@@ -81,10 +83,7 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 	 * @param array $formResponseArray
 	 * @return void
 	 */
-	public function processAction(Tx_SuperForms_Domain_Model_Form $form, $formResponseArray) {
-		$formResponse = $this->objectManager->create('Tx_SuperForms_Domain_Model_Response');
-		/** @var $formResponse Tx_SuperForms_Domain_Model_Response */
-		$formResponse->setForm($form)->setValues($formResponseArray);
+	public function processAction(Tx_SuperForms_Domain_Model_Form $form, Tx_SuperForms_Domain_Model_Response $formResponse) {
 		$validationResult = $form->validate($formResponse);
 
 		if (!$validationResult->hasErrors()) {

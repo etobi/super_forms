@@ -1,1 +1,9 @@
-<f:if condition="{field.label}" then="{field.label}" /> <f:form.textfield name="{field.name}" size="{field.size}" value="{field.value}" />
+{namespace this=Tx_SuperForms_ViewHelpers}
+<this:if.hasErrors field="{field}" validationResult="{validationResult}">
+	<ul>
+		<this:errors field="{field}" validationResult="{validationResult}">
+			<li>{error}</li>
+		</this:errors>
+	</ul>
+</this:if.hasErrors>
+{field.label} <f:form.textfield property="values.{field.name}" size="{field.size}" value="{this:value(field: field, formResponse: formResponse, validationResult: validationResult)}" />

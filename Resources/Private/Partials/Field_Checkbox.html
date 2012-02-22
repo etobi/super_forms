@@ -6,7 +6,7 @@
 			</f:for>
 		</f:then>
 		<f:else>
-			<f:form.checkbox name="{field.name}" value="{field.splittedOption.value}" checked="{field.splittedOption.selected}" /> <label><f:if condition="{field.label}" then="{field.label}" />{field.splittedOption.label}</label>
+			<f:form.checkbox property="values.{field.name}" value="{field.splittedOption.value}" checked="{field.splittedOption.selected}" /> <label><f:if condition="{field.label}" then="{field.label}" />{field.splittedOption.label}</label>
 		</f:else>
 	</f:if>
 </div>
