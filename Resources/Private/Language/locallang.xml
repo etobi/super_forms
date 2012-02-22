@@ -33,6 +33,7 @@
 			<label index="tx_superforms_domain_model_processor.configuration_maxNumberOfParticipants">Maximum number of participants</label>
 			<label index="tx_superforms_domain_model_validator">Validator</label>
 			<label index="tx_superforms_domain_model_validator.type">Type</label>
+			<label index="tx_superforms_domain_model_validator.message">Error message</label>
 			<label index="tx_superforms_domain_model_validator.configuration">Configuration</label>
 			<label index="tx_superforms_domain_model_validator.configuration2">Configuration 2</label>
 			<label index="FlexForm.Display.sheet.general">Generelles</label>

@@ -64,6 +64,11 @@ class Tx_SuperForms_Domain_Model_Validator extends Tx_Extbase_DomainObject_Abstr
 	protected $configuration2;
 
 	/**
+	 * @var string
+	 */
+	protected $message;
+
+	/**
 	 * @param string $type
 	 */
 	public function setType($type) {
@@ -145,7 +150,7 @@ class Tx_SuperForms_Domain_Model_Validator extends Tx_Extbase_DomainObject_Abstr
 	 * @return string
 	 */
 	public function getMessage() {
-		return 'TODO';
+		return $this->message;
 	}
 
 	/**

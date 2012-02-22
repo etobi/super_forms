@@ -9,12 +9,12 @@ $TCA['tx_superforms_domain_model_validator'] = array(
 		'showRecordFieldList' => '',
 	),
 	'types' => array(
-		'NotEmpty' => array('showitem' => 'type'),
-		'EmailAddress' => array('showitem' => 'type'),
-		'Number' => array('showitem' => 'type'),
-		'NumberRange' => array('showitem' => 'type, configuration, configuration2'),
-		'StringLength' => array('showitem' => 'type, configuration, configuration2'),
-		'RegularExpression' => array('showitem' => 'type, configuration'),
+		'NotEmpty' => array('showitem' => 'type, message'),
+		'EmailAddress' => array('showitem' => 'type, message'),
+		'Number' => array('showitem' => 'type, message'),
+		'NumberRange' => array('showitem' => 'type, message, configuration, configuration2'),
+		'StringLength' => array('showitem' => 'type, message, configuration, configuration2'),
+		'RegularExpression' => array('showitem' => 'type, message, configuration'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -95,6 +95,14 @@ $TCA['tx_superforms_domain_model_validator'] = array(
 				'type' => 'input',
 				'size' => '10'
 			)
+		),
+		'message' => array(
+			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_validator.message',
+			'config' => array(
+				'type' => 'text',
+				'cols' => 30,
+				'rows' => 3
+			),
 		),
 		'field' => array(
 			'config' => array(

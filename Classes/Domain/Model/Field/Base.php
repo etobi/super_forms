@@ -340,6 +340,7 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 		if ($this->validationDependsOnField && !$this->validationDependsOnField->hasResponseValue($response)) {
 			return $validationResult;
 		}
+
 		$value = $response->get($this->getName());
 
 		foreach ($this->getValidators() as $validator) {
