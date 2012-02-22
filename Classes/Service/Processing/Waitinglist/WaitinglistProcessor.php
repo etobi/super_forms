@@ -35,6 +35,21 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	protected $maxNumberOfParticipants = 5;
 
 	/**
+	 * @var string
+	 */
+	protected $textParticipant;
+
+	/**
+	 * @var string
+	 */
+	protected $textWaitinglist;
+
+	/**
+	 * @var bool
+	 */
+	protected $isOnWaitinglist;
+
+	/**
 	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
 	 * @return void
 	 */
@@ -46,10 +61,20 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	 * @return bool
 	 */
 	public function isOnWaitinglist() {
-		$databaseProcessor = $this->getForm()->getProcessorByType(Tx_SuperForms_Domain_Model_Processor::TYPE_DATABASE);
-		return $databaseProcessor ?
+		if ($this->isOnWaitinglist === NULL) {
+			$databaseProcessor = $this->getForm()->getProcessorByType(Tx_SuperForms_Domain_Model_Processor::TYPE_DATABASE);
+			$this->isOnWaitinglist = $databaseProcessor ?
 				($databaseProcessor->getService()->getRecordCount() >= $this->maxNumberOfParticipants) :
 				FALSE;
+		}
+		return $this->isOnWaitinglist;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getText() {
+		return $this->isOnWaitinglist ? $this->textWaitinglist : $this->textParticipant;
 	}
 }
 

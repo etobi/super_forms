@@ -9,6 +9,7 @@ CREATE TABLE tx_superforms_domain_model_form (
 	name varchar(255) DEFAULT '' NOT NULL,
 	fields int(11) unsigned DEFAULT '0' NOT NULL,
 	processors varchar(255) DEFAULT '' NOT NULL,
+	text_confirm text NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

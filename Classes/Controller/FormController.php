@@ -90,7 +90,7 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 		if (!$validationResult->hasErrors()) {
 			$form->process($formResponse);
 				// @todo fix this to be redirect! (have to redirect to actual url!)
-			$this->forward('confirm');
+			$this->forward('confirm', NULL, NULL, array('form' => $form, 'formResponse' => $formResponse));
 		} else {
 				// TODO
 			$this->forward('show', NULL, NULL, array('form' => $form, 'formResponse' => $formResponse, 'validationResult' => $validationResult));
@@ -98,9 +98,13 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 	}
 
 	/**
-	 * @return string
+	 * @param Tx_SuperForms_Domain_Model_Form $form
+	 * @param null|Tx_SuperForms_Domain_Model_Response $formResponse
+	 * @return void
 	 */
-	public function confirmAction() {
+	public function confirmAction(Tx_SuperForms_Domain_Model_Form $form, Tx_SuperForms_Domain_Model_Response $formResponse = NULL) {
+		$this->view->assign('form', $form);
+		$this->view->assign('formResponse', $formResponse);
 	}
 }
 ?>

@@ -11,6 +11,8 @@
 			<label index="tx_superforms_domain_model_form.name">Form name</label>
 			<label index="tx_superforms_domain_model_form.fields">Fields</label>
 			<label index="tx_superforms_domain_model_form.processors">Form processors</label>
+			<label index="tx_superforms_domain_model_form.texts">Texts</label>
+			<label index="tx_superforms_domain_model_form.textConfirm">Text, Confirm page</label>
 			<label index="tx_superforms_domain_model_field">Field</label>
 			<label index="tx_superforms_domain_model_field.type">Type</label>
 			<label index="tx_superforms_domain_model_field.validators">Validation</label>

@@ -50,6 +50,11 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	protected $processors;
 
 	/**
+	 * @var string
+	 */
+	protected $textConfirm;
+
+	/**
 	 *
 	 */
 	public function __construct() {}
@@ -138,6 +143,18 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	}
 
 	/**
+	 * @return array
+	 */
+	public function getProcessorResultTexts() {
+		$texts = array();
+		foreach($this->getProcessors() as $processor) {
+			$text = $processor->getService()->getText();
+			if ($text) $texts[] = $text;
+		}
+		return $texts;
+	}
+
+	/**
 	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
 	 * @return Tx_SuperForms_Validation_Result
 	 */
@@ -170,6 +187,20 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 					'extensionName' => 'SuperForms',
 					'pluginName' => 'Render'
 				));
+	}
+
+	/**
+	 * @param string $textConfirm
+	 */
+	public function setTextConfirm($textConfirm) {
+		$this->textConfirm = $textConfirm;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTextConfirm() {
+		return $this->textConfirm;
 	}
 }
 ?>

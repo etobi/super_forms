@@ -11,7 +11,8 @@ $TCA['tx_superforms_domain_model_form'] = array(
 	'types' => array(
 		'1' => array('showitem' => 'title, name,' .
 			'--div--;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.fields, fields,' .
-			'--div--;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.processors, processors'
+			'--div--;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.processors, processors,' .
+			'--div--;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.texts, text_confirm'
 		),
 	),
 	'palettes' => array(
@@ -110,6 +111,16 @@ $TCA['tx_superforms_domain_model_form'] = array(
 					'showAllLocalizationLink' => 1
 				),
 			)
+		),
+		'text_confirm' => array(
+			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.textConfirm',
+			'config' => array(
+				'type' => 'text',
+				'cols' => 40,
+				'rows' => 10,
+				'wrap' => 'virtual',
+			),
+			'defaultExtras' => 'richtext[*]:rte_transform[mode=ts_css]'
 		),
 	),
 );
