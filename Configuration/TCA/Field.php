@@ -142,7 +142,6 @@ $TCA['tx_superforms_domain_model_field'] = array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_superforms_domain_model_form',
-				'foreign_field' => 'processors'
 			),
 		),
 		'sorting' => array(

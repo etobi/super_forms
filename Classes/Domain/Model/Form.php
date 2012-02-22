@@ -65,10 +65,6 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_SuperForms_Domain_Model_Field_Base>
 	 */
 	public function getFields() {
-			// TODO remove dirty hack
-		foreach($this->fields as $field) {
-			$field->setForm($this);
-		}
 		return $this->fields;
 	}
 
