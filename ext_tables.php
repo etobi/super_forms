@@ -16,7 +16,11 @@ $TCA['tx_superforms_domain_model_form'] = array(
 		'cruser_id' => 'cruser_id',
 		'dividers2tabs' => TRUE,
 		'delete' => 'deleted',
-		'enablecolumns' => array(),
+		'enablecolumns' => array(
+			'disabled' => 'hidden',
+			'starttime' => 'starttime',
+			'endtime' => 'endtime',
+		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Form.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/model.gif'
 	),
