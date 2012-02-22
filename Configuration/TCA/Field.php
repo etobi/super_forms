@@ -175,7 +175,9 @@ $TCA['tx_superforms_domain_model_field'] = array(
 					array('(none)',  '0'),
 				),
 				'foreign_table' => 'tx_superforms_domain_model_field',
-				'foreign_table_where' => 'AND tx_superforms_domain_model_field.uid != ###REC_FIELD_uid### AND tx_superforms_domain_model_field.form = ###REC_FIELD_form###',
+				'foreign_table_where' => 'AND tx_superforms_domain_model_field.uid != ###REC_FIELD_uid### ' .
+						' AND tx_superforms_domain_model_field.form = ###REC_FIELD_form### ' .
+						' AND tx_superforms_domain_model_field.type = \'Tx_SuperForms_Domain_Model_Field_Checkbox\'',
 			)
 		)
 	),

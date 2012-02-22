@@ -16,7 +16,7 @@
 			<label index="tx_superforms_domain_model_field">Field</label>
 			<label index="tx_superforms_domain_model_field.type">Type</label>
 			<label index="tx_superforms_domain_model_field.validators">Validation</label>
-			<label index="tx_superforms_domain_model_field.validation_depends_on_field">Validation depends on Field:</label>
+			<label index="tx_superforms_domain_model_field.validation_depends_on_field">Validation depends on Field: (Checkboxes supported only)</label>
 			<label index="tx_superforms_domain_model_field.label">Label</label>
 			<label index="tx_superforms_domain_model_field.name">Field name</label>
 			<label index="tx_superforms_domain_model_field.configuration">Configuration</label>

@@ -161,7 +161,7 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	public function validate(Tx_SuperForms_Domain_Model_Response $formResponse) {
 		$validationResult = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->create('Tx_SuperForms_Validation_Result');
 		foreach($this->getFields() as $field) {
-			$fieldValidationResults = $field->validate($formResponse->get($field->getName()));
+			$fieldValidationResults = $field->validate($formResponse);
 			if ($fieldValidationResults->hasErrors()) {
 				$validationResult->addErrors(
 					$field->getName(),

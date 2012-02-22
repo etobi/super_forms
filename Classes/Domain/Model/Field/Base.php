@@ -331,14 +331,31 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 		return NULL;
 	}
 
-	public function validate($value) {
+	/**
+	 * @param Tx_SuperForms_Domain_Model_Response $value
+	 * @return Tx_SuperForms_Validation_Result
+	 */
+	public function validate(Tx_SuperForms_Domain_Model_Response $response) {
 		$validationResult = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->create('Tx_SuperForms_Validation_Result');
+		if ($this->validationDependsOnField && !$this->validationDependsOnField->hasResponseValue($response)) {
+			return $validationResult;
+		}
+		$value = $response->get($this->getName());
+
 		foreach ($this->getValidators() as $validator) {
 			if (!$validator->isValid($value)) {
 				$validationResult->addError($this->getName(), $validator->getMessage(), $validator->getCode());
 			}
 		}
 		return $validationResult;
+	}
+
+	/**
+	 * @param $response
+	 * @return void
+	 */
+	public function hasResponseValue($response) {
+		return $response->get($this->getName()) != '';
 	}
 
 	/**
