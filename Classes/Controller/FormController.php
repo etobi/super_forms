@@ -76,6 +76,12 @@ class Tx_SuperForms_Controller_FormController extends Tx_Extbase_MVC_Controller_
 		$this->view->assign('form', $form);
 		$this->view->assign('formResponse', ($formResponse ?: $this->objectManager->create('Tx_SuperForms_Domain_Model_Response')));
 		$this->view->assign('validationResult', $validationResult);
+
+			// hack around wired fluid bug
+		$arguments = $this->request->getArguments();
+		unset($arguments['form']);
+		unset($arguments['formResponse']);
+		$this->request->setArguments($arguments);
 	}
 
 	/**
