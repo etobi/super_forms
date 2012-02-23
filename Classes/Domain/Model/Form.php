@@ -202,5 +202,14 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	public function getTextConfirm() {
 		return $this->textConfirm;
 	}
+
+	/**
+	 * @return Tx_SuperForms_Domain_Model_Processor
+	 */
+	public function getWaitinglist() {
+		$processor = $this->getProcessorByType(Tx_SuperForms_Domain_Model_Processor::TYPE_WAITINGLIST);
+		return $processor ? $processor->getService() : NULL;
+	}
+
 }
 ?>

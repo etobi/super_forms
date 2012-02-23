@@ -37,8 +37,10 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	const TYPE_SELECT = 'Tx_SuperForms_Domain_Model_Field_Select';
 	const TYPE_SUBMITBUTTON = 'Tx_SuperForms_Domain_Model_Field_SubmitButton';
 	const TYPE_TEXTBLOCK = 'Tx_SuperForms_Domain_Model_Field_Textblock';
+	const TYPE_SEPARATOR = 'Tx_SuperForms_Domain_Model_Field_Separator';
 	const TYPE_HIDDEN = 'Tx_SuperForms_Domain_Model_Field_Hidden';
 	const TYPE_AUTOFILL = 'Tx_SuperForms_Domain_Model_Field_Autofill';
+	const TYPE_WAITINGLISTCOUNTER = 'Tx_SuperForms_Domain_Model_Field_Waitinglist';
 
 	/**
 	 * @var string

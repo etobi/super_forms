@@ -23,8 +23,10 @@ $TCA['tx_superforms_domain_model_field'] = array(
 		'Tx_SuperForms_Domain_Model_Field_Select'       => array('showitem' => $tempShowItems['general'] . ', name, configuration, ' . $tempShowItems['validators']),
 		'Tx_SuperForms_Domain_Model_Field_SubmitButton' => array('showitem' => $tempShowItems['general'] . ', name, value'),
 		'Tx_SuperForms_Domain_Model_Field_Textblock'    => array('showitem' => $tempShowItems['general'] . ', configuration'),
+		'Tx_SuperForms_Domain_Model_Field_Separator'    => array('showitem' => 'type'),
 		'Tx_SuperForms_Domain_Model_Field_Hidden'       => array('showitem' => 'type, name, value'),
 		'Tx_SuperForms_Domain_Model_Field_Autofill'     => array('showitem' => 'type, name, configuration'),
+		'Tx_SuperForms_Domain_Model_Field_WaitinglistCounter'  => array('showitem' => 'type'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -86,8 +88,10 @@ $TCA['tx_superforms_domain_model_field'] = array(
 					array('Select', 'Tx_SuperForms_Domain_Model_Field_Select'),
 					array('Submit button', 'Tx_SuperForms_Domain_Model_Field_SubmitButton'),
 					array('Text only', 'Tx_SuperForms_Domain_Model_Field_Textblock'),
+					array('Separator', 'Tx_SuperForms_Domain_Model_Field_Separator'),
 					array('Hidden', 'Tx_SuperForms_Domain_Model_Field_Hidden'),
 					array('Autofill', 'Tx_SuperForms_Domain_Model_Field_Autofill'),
+					array('Waitinglist counter', 'Tx_SuperForms_Domain_Model_Field_WaitinglistCounter'),
 				),
 				'default' => 'Tx_SuperForms_Domain_Model_Field_Base'
 			)
@@ -132,8 +136,10 @@ $TCA['tx_superforms_domain_model_field'] = array(
 					'Tx_SuperForms_Domain_Model_Field_Select' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/Select.xml',
 					'Tx_SuperForms_Domain_Model_Field_SubmitButton' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/SubmitButton.xml',
 					'Tx_SuperForms_Domain_Model_Field_Textblock' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/Textblock.xml',
+					'Tx_SuperForms_Domain_Model_Field_Separator' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/Separator.xml',
 					'Tx_SuperForms_Domain_Model_Field_Hidden' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/Hidden.xml',
 					'Tx_SuperForms_Domain_Model_Field_Autofill' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/Autofill.xml',
+					'Tx_SuperForms_Domain_Model_Field_WaitinglistCounter' => 'FILE:EXT:super_forms/Configuration/FlexForms/Field/WaitinglistCounter.xml',
 				)
 			)
 		),

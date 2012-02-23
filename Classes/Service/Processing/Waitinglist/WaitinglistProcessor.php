@@ -45,9 +45,9 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	protected $textWaitinglist;
 
 	/**
-	 * @var bool
+	 * @var int
 	 */
-	protected $isOnWaitinglist;
+	protected $participantCount;
 
 	/**
 	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
@@ -61,21 +61,48 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	 * @return bool
 	 */
 	public function isOnWaitinglist() {
-		if ($this->isOnWaitinglist === NULL) {
-			$databaseProcessor = $this->getForm()->getProcessorByType(Tx_SuperForms_Domain_Model_Processor::TYPE_DATABASE);
-			$this->isOnWaitinglist = $databaseProcessor ?
-				($databaseProcessor->getService()->getRecordCount() >= $this->maxNumberOfParticipants) :
-				FALSE;
-		}
-		return $this->isOnWaitinglist;
+		return !$this->getHasFreePlaces();
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getText() {
-		return $this->isOnWaitinglist ? $this->textWaitinglist : $this->textParticipant;
+		return $this->isOnWaitinglist() ? $this->textWaitinglist : $this->textParticipant;
 	}
+
+	/**
+	 * @return void
+	 */
+	public function getParticipantCount() {
+		if ($this->participantCount === NULL) {
+			$databaseProcessor = $this->getForm()->getProcessorByType(Tx_SuperForms_Domain_Model_Processor::TYPE_DATABASE);
+			$this->participantCount = $databaseProcessor->getService()->getRecordCount();
+		}
+		return $this->participantCount;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getFreePlacesCount() {
+		return $this->maxNumberOfParticipants - $this->getParticipantCount();
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getHasFreePlaces() {
+		return $this->getFreePlacesCount() > 0;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getMaxNumberOfParticipants() {
+		return $this->maxNumberOfParticipants;
+	}
+
 }
 
 ?>
