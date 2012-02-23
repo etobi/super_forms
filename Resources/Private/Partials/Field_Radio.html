@@ -4,7 +4,11 @@
 		<label>{field.label}</label><br/>
 	</f:if>
 	<f:for each="{field.splittedOptions}" as="option">
-		<f:form.radio name="{field.name}" value="{option.value}" checked="{option.selected}" id="form_{field.form.name}_field_{field.name}_{option.value}" />
+		<f:form.radio
+			property="values.{field.name}"
+			value="{option.value}"
+			checked="{this:value(field: field, formResponse: formResponse, validationResult: validationResult, trueIfEquals: option.value)}"
+			id="form_{field.form.name}_field_{field.name}_{option.value}" />
 		<f:if condition="{option.label}">
 			<label for="form_{field.form.name}_field_{field.name}_{option.value}">{option.label}</label><br />
 		</f:if>

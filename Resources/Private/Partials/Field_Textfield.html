@@ -3,6 +3,10 @@
 	<f:if condition="{field.label}">
 		<label for="form_{field.form.name}_field_{field.name}">{field.label}</label>
 	</f:if>
-	<f:form.textfield property="values.{field.name}" size="{field.size}" id="form_{field.form.name}_field_{field.name}" value="{this:value(field: field, formResponse: formResponse, validationResult: validationResult)}" />
+	<f:form.textfield
+		property="values.{field.name}"
+		size="{field.size}"
+		id="form_{field.form.name}_field_{field.name}"
+		value="{this:value(field: field, formResponse: formResponse, validationResult: validationResult)}" />
 	<f:render partial="Error" arguments="{field: field, formResponse: formResponse, validationResult: validationResult}" />
 </div>

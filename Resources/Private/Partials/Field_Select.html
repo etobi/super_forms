@@ -3,6 +3,12 @@
 	<f:if condition="{field.label}">
 		<label for="form_{field.form.name}_field_{field.name}">{field.label}</label>
 	</f:if>
-	<f:form.select name="{field.name}" id="form_{field.form.name}_field_{field.name}" options="{field.splittedOptionsForSelect}" value="{field.selectedOptionsForSelect}" size="{field.size}" />
+	<f:form.select
+		property="values.{field.name}"
+		id="form_{field.form.name}_field_{field.name}"
+		options="{field.splittedOptionsForSelect}"
+		value="{field.selectedOptionsForSelect}"
+		size="{field.size}"
+		/>
 	<f:render partial="Error" arguments="{field: field, formResponse: formResponse, validationResult: validationResult}" />
 </div>

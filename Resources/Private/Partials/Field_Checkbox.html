@@ -6,14 +6,22 @@
 	<f:if condition="{field.hasMultipleOptions}">
 		<f:then>
 			<f:for each="{field.splittedOptions}" as="option">
-				<f:form.checkbox name="{field.name}[]" value="{option.value}" checked="{option.selected}" id="form_{field.form.name}_field_{field.name}_{option.value}" />
+				<f:form.checkbox
+					property="values.{field.name}"
+					value="{option.value}"
+					checked="{this:value(field: field, formResponse: formResponse, validationResult: validationResult, trueIfEquals: option.value)}"
+					id="form_{field.form.name}_field_{field.name}_{option.value}" />
 				<f:if condition="{option.label}">
 					<label for="form_{field.form.name}_field_{field.name}_{option.value}">{option.label}</label><br />
 				</f:if>
 			</f:for>
 		</f:then>
 		<f:else>
-			<f:form.checkbox property="values.{field.name}" value="{field.splittedOption.value}" checked="{field.splittedOption.selected}" id="form_{field.form.name}_field_{field.name}" />
+			<f:form.checkbox
+				property="values.{field.name}"
+				value="{field.splittedOption.value}"
+				checked="{this:value(field: field, formResponse: formResponse, validationResult: validationResult, trueIfEquals: field.splittedOption.value)}"
+				id="form_{field.form.name}_field_{field.name}" />
 			<f:if condition="{field.splittedOption.label}">
 				<label for="form_{field.form.name}_field_{field.name}">{field.splittedOption.label}</label>
 			</f:if>
