@@ -1,3 +1,6 @@
 <div>
-	<f:form.submit name="{field.name}" value="{field.value}" />
+	<f:if condition="{field.label}">
+		<label for="form_{field.form.name}_field_{field.name}">{field.label}</label>
+	</f:if>
+	<f:form.submit name="{field.name}" value="{field.value}" id="form_{field.form.name}_field_{field.name}" />
 </div>

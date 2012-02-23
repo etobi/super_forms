@@ -1,0 +1,8 @@
+{namespace this=Tx_SuperForms_ViewHelpers}
+<this:if.hasErrors field="{field}" validationResult="{validationResult}">
+	<ul>
+		<this:errors field="{field}" validationResult="{validationResult}">
+			<li><f:if condition="{error}" then="{error}" else="{f:translate(key:'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:form.errorMessage')}" /></li>
+		</this:errors>
+	</ul>
+</this:if.hasErrors>

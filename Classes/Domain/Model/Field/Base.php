@@ -286,8 +286,13 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function getSettings() {
 		if ($this->_settings === NULL) {
-			$flexformValues = $this->_flexformService->convertFlexFormContentToArray($this->getConfiguration());
-			$this->_settings = $flexformValues['settings'];
+			$configuration = $this->getConfiguration();
+			if ($configuration) {
+				$flexformValues = $this->_flexformService->convertFlexFormContentToArray($configuration);
+				$this->_settings = $flexformValues['settings'];
+			} else {
+				$this->_settings = array();
+			}
 		}
 		return $this->_settings;
 	}

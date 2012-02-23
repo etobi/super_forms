@@ -1,11 +1,8 @@
 {namespace this=Tx_SuperForms_ViewHelpers}
-<this:if.hasErrors field="{field}" validationResult="{validationResult}">
-	<ul>
-		<this:errors field="{field}" validationResult="{validationResult}">
-			<li>{error}</li>
-		</this:errors>
-	</ul>
-</this:if.hasErrors>
 <div>
-	<f:form.textarea property="values.{field.name}" rows="{field.rows}" cols="{field.cols}">{this:value(field: field, formResponse: formResponse, validationResult: validationResult)}</f:form.textarea>
+	<f:if condition="{field.label}">
+		<label for="form_{field.form.name}_field_{field.name}">{field.label}</label>
+	</f:if>
+	<f:form.textarea property="values.{field.name}" rows="{field.rows}" cols="{field.cols}" id="form_{field.form.name}_field_{field.name}">{this:value(field: field, formResponse: formResponse, validationResult: validationResult)}</f:form.textarea>
+	<f:render partial="Error" arguments="{field: field, formResponse: formResponse, validationResult: validationResult}" />
 </div>
