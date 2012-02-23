@@ -38,6 +38,7 @@
 			<label index="tx_superforms_domain_model_validator.configuration2">Configuration 2</label>
 			<label index="FlexForm.Display.sheet.general">Generelles</label>
 			<label index="FlexForm.Display.form">Formular</label>
+			<label index="form.errorMessage">Fehlerhafte Eingabe</label>
 		</languageKey>
 	</data>
 </T3locallang>

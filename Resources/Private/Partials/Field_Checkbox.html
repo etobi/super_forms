@@ -19,11 +19,5 @@
 			</f:if>
 		</f:else>
 	</f:if>
-	<this:if.hasErrors field="{field}" validationResult="{validationResult}">
-		<ul>
-			<this:errors field="{field}" validationResult="{validationResult}">
-				<li>{error}</li>
-			</this:errors>
-		</ul>
-	</this:if.hasErrors>
+	<f:render partial="Error" arguments="{field: field, formResponse: formResponse, validationResult: validationResult}" />
 </div>

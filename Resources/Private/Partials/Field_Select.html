@@ -4,11 +4,5 @@
 		<label for="form_{field.form.name}_field_{field.name}">{field.label}</label>
 	</f:if>
 	<f:form.select name="{field.name}" id="form_{field.form.name}_field_{field.name}" options="{field.splittedOptionsForSelect}" value="{field.selectedOptionsForSelect}" size="{field.size}" />
-	<this:if.hasErrors field="{field}" validationResult="{validationResult}">
-		<ul>
-			<this:errors field="{field}" validationResult="{validationResult}">
-				<li>{error}</li>
-			</this:errors>
-		</ul>
-	</this:if.hasErrors>
+	<f:render partial="Error" arguments="{field: field, formResponse: formResponse, validationResult: validationResult}" />
 </div>
