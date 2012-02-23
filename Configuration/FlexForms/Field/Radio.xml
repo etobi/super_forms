@@ -9,7 +9,7 @@
 					<label>Options</label>
 					<config>
 						<type>text</type>
-						<cols>30</cols>
+						<cols>60</cols>
 						<rows>7</rows>
 					</config>
 				</TCEforms>
