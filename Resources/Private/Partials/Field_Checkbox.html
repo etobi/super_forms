@@ -1,13 +1,29 @@
+{namespace this=Tx_SuperForms_ViewHelpers}
 <div>
-	{field.label}
+	<f:if condition="{field.label}">
+		<label>{field.label}</label><br/>
+	</f:if>
 	<f:if condition="{field.hasMultipleOptions}">
 		<f:then>
 			<f:for each="{field.splittedOptions}" as="option">
-				<f:form.checkbox name="{field.name}[]" value="{option.value}" checked="{option.selected}" /><label>{option.label}</label><br />
+				<f:form.checkbox name="{field.name}[]" value="{option.value}" checked="{option.selected}" id="form_{field.form.name}_field_{field.name}_{option.value}" />
+				<f:if condition="{option.label}">
+					<label for="form_{field.form.name}_field_{field.name}_{option.value}">{option.label}</label><br />
+				</f:if>
 			</f:for>
 		</f:then>
 		<f:else>
-			<f:form.checkbox property="values.{field.name}" value="{field.splittedOption.value}" checked="{field.splittedOption.selected}" /> <label>{field.splittedOption.label}</label>
+			<f:form.checkbox property="values.{field.name}" value="{field.splittedOption.value}" checked="{field.splittedOption.selected}" id="form_{field.form.name}_field_{field.name}" />
+			<f:if condition="{field.splittedOption.label}">
+				<label for="form_{field.form.name}_field_{field.name}">{field.splittedOption.label}</label>
+			</f:if>
 		</f:else>
 	</f:if>
+	<this:if.hasErrors field="{field}" validationResult="{validationResult}">
+		<ul>
+			<this:errors field="{field}" validationResult="{validationResult}">
+				<li>{error}</li>
+			</this:errors>
+		</ul>
+	</this:if.hasErrors>
 </div>
