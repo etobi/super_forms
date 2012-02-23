@@ -1,12 +1,13 @@
 <div>
+	{field.label}
 	<f:if condition="{field.hasMultipleOptions}">
 		<f:then>
 			<f:for each="{field.splittedOptions}" as="option">
-				<f:form.checkbox name="{field.name}[]" value="{option.value}" checked="{option.selected}" /><label><f:if condition="{field.label}" then="{field.label}" />{option.label}</label><br />
+				<f:form.checkbox name="{field.name}[]" value="{option.value}" checked="{option.selected}" /><label>{option.label}</label><br />
 			</f:for>
 		</f:then>
 		<f:else>
-			<f:form.checkbox property="values.{field.name}" value="{field.splittedOption.value}" checked="{field.splittedOption.selected}" /> <label><f:if condition="{field.label}" then="{field.label}" />{field.splittedOption.label}</label>
+			<f:form.checkbox property="values.{field.name}" value="{field.splittedOption.value}" checked="{field.splittedOption.selected}" /> <label>{field.splittedOption.label}</label>
 		</f:else>
 	</f:if>
 </div>
