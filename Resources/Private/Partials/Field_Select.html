@@ -7,7 +7,7 @@
 		property="values.{field.name}"
 		id="form_{field.form.name}_field_{field.name}"
 		options="{field.splittedOptionsForSelect}"
-		value="{field.selectedOptionsForSelect}"
+		value="this:value(field: field, formResponse: formResponse, validationResult: validationResult)"
 		size="{field.size}"
 		/>
 	<f:render partial="Error" arguments="{field: field, formResponse: formResponse, validationResult: validationResult}" />
