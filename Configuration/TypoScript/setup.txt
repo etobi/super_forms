@@ -12,6 +12,11 @@ plugin.tx_superforms {
 }
 
 config.tx_extbase.persistence.classes {
+	Tx_SuperForms_Domain_Model_Form.mapping.columns {
+		starttime.mapOnProperty = startTime
+		endtime.mapOnProperty = endTime
+	}
+
 	Tx_SuperForms_Domain_Model_Field_Base {
 		mapping {
 			tableName = tx_superforms_domain_model_field

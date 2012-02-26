@@ -55,6 +55,16 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	protected $textConfirm;
 
 	/**
+	 * @var DateTime
+	 */
+	protected $startTime;
+
+	/**
+	 * @var DateTime
+	 */
+	protected $endTime;
+
+	/**
 	 *
 	 */
 	public function __construct() {}
@@ -211,5 +221,57 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 		return $processor ? $processor->getService() : NULL;
 	}
 
+	/**
+	 * @param DateTime $startTime
+	 * @return Tx_SuperForms_Domain_Model_Form this
+	 */
+	public function setStartTime($startTime) {
+		$this->startTime = $startTime;
+		return $this;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function getStartTime() {
+		return $this->startTime;
+	}
+
+	/**
+	 * @param DateTime $endTime
+	 * @return Tx_SuperForms_Domain_Model_Form this
+	 */
+	public function setEndTime($endTime) {
+		$this->endTime = $endTime;
+		return $this;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function getEndTime() {
+		return $this->endTime;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getIsActive() {
+		return (!$this->getIsNotStarted() && !$this->getIsEnded());
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getIsNotStarted() {
+		return ($this->getStartTime() && $this->getStartTime() > new DateTime());
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getIsEnded() {
+		return (!$this->getEndTime() || ($this->getEndTime() < new DateTime()));
+	}
 }
 ?>
