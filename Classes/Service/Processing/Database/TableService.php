@@ -42,7 +42,7 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 	/**
 	 * @var string
 	 */
-	protected $tablePrefix = 'tx_superforms_domain_model_dynamic_response_';
+	protected $tablePrefix = 'user_superforms_domain_model_dynamic_response_';
 
 	/**
 	 * @var string
