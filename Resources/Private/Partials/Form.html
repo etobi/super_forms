@@ -1,13 +1,19 @@
 {namespace this=Tx_SuperForms_ViewHelpers}
-<div class="super-form form-{form.name}">
-	<h5>{form.title}</h5>
+<f:if condition="{form.canSubscribe}"><f:then>
+	<div class="super-form form-{form.name}">
+		<h5>{form.title}</h5>
 
-	<f:form action="render" object="{formResponse}" name="formResponse" addQueryString="TRUE" noCacheHash="TRUE">
-		<f:form.hidden property="form" value="{form}" />
-		<f:for each="{form.fields}" as="field">
-			<div class="form-field-row form-field-row-{field.shortType}">
-				<f:render partial="Field_{field.shortType}" arguments="{field: field, formResponse: formResponse, validationResult: validationResult}" />
-			</div>
-		</f:for>
-	</f:form>
-</div>
+		<f:form action="render" object="{formResponse}" name="formResponse" addQueryString="TRUE" noCacheHash="TRUE">
+			<f:form.hidden property="form" value="{form}" />
+			<f:for each="{form.fields}" as="field">
+				<div class="form-field-row form-field-row-{field.shortType}">
+					<f:render partial="Field_{field.shortType}" arguments="{field: field, formResponse: formResponse, validationResult: validationResult}" />
+				</div>
+			</f:for>
+		</f:form>
+	</div>
+</f:then>
+<f:else>
+	{form.waitinglist.textFull}
+</f:else>
+</f:if>

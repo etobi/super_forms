@@ -69,13 +69,6 @@ abstract class Tx_SuperForms_Service_Processing_AbstractProcessor implements Tx_
 	}
 
 	/**
-	 * @return void
-	 */
-	public function getText() {
-		return NULL;
-	}
-
-	/**
 	 * @param Tx_Extbase_Service_FlexFormService $flexformService
 	 * @return void
 	 */

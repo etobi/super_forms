@@ -32,7 +32,12 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	/**
 	 * @var int
 	 */
-	protected $maxNumberOfParticipants = 5;
+	protected $maxNumberOfParticipants = 999;
+
+	/**
+	 * @var int
+	 */
+	protected $maxNumberOnWaitinglist = 999;
 
 	/**
 	 * @var string
@@ -45,9 +50,19 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	protected $textWaitinglist;
 
 	/**
+	 * @var string
+	 */
+	protected $textFull;
+
+	/**
 	 * @var int
 	 */
 	protected $participantCount;
+
+	/**
+	 * @var string
+	 */
+	protected $waitinglistFlagFieldname;
 
 	/**
 	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
@@ -55,20 +70,6 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	 */
 	public function process(Tx_SuperForms_Domain_Model_Response $formResponse) {
 		// noop
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isOnWaitinglist() {
-		return !$this->getHasFreePlaces();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getText() {
-		return $this->isOnWaitinglist() ? $this->textWaitinglist : $this->textParticipant;
 	}
 
 	/**
@@ -83,10 +84,33 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isOnWaitinglist() {
+		return !$this->getHasFreePlaces() && $this->getHasFreeWaitinglistPlaces();
+	}
+
+	/**
 	 * @return int
 	 */
 	public function getFreePlacesCount() {
 		return $this->maxNumberOfParticipants - $this->getParticipantCount();
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getCountOnWaitinglist() {
+		$count = ($this->maxNumberOfParticipants - $this->getParticipantCount());
+		if ($count > 0) $count = 0;
+		return $count * -1;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getCanSubscribe() {
+		return $this->getHasFreePlaces() || $this->getHasFreeWaitinglistPlaces();
 	}
 
 	/**
@@ -97,10 +121,52 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function getHasFreeWaitinglistPlaces() {
+		return $this->getCountOnWaitinglist() < $this->getMaxNumberOnWaitinglist();
+	}
+
+	/**
 	 * @return int
 	 */
 	public function getMaxNumberOfParticipants() {
 		return $this->maxNumberOfParticipants;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getMaxNumberOnWaitinglist() {
+		return $this->maxNumberOnWaitinglist;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTextFull() {
+		return $this->textFull;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTextParticipant() {
+		return $this->textParticipant;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTextWaitinglist() {
+		return $this->textWaitinglist;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getWaitinglistFlagFieldname() {
+		return $this->waitinglistFlagFieldname;
 	}
 
 }

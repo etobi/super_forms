@@ -31,6 +31,10 @@
 			<label index="tx_superforms_domain_model_processor.configuration">Configuration</label>
 			<label index="tx_superforms_domain_model_processor.configuration_recipient">Recipient</label>
 			<label index="tx_superforms_domain_model_processor.configuration_maxNumberOfParticipants">Maximum number of participants</label>
+			<label index="tx_superforms_domain_model_processor.configuration_maxNumberOfWaitinglist">Maximum number on waitinglist</label>
+			<label index="tx_superforms_domain_model_processor.configuration_textParticipant">Confirm Text, User is participant</label>
+			<label index="tx_superforms_domain_model_processor.configuration_textWaitinglist">Confirm Text, User is on Waitinglist</label>
+			<label index="tx_superforms_domain_model_processor.configuration_textFull">Text, Event is fully booked</label>
 			<label index="tx_superforms_domain_model_validator">Validator</label>
 			<label index="tx_superforms_domain_model_validator.type">Type</label>
 			<label index="tx_superforms_domain_model_validator.message">Error message</label>

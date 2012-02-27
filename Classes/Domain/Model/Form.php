@@ -153,24 +153,23 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	}
 
 	/**
-	 * @return array
-	 */
-	public function getProcessorResultTexts() {
-		$texts = array();
-		foreach($this->getProcessors() as $processor) {
-			$text = $processor->getService()->getText();
-			if ($text) $texts[] = $text;
-		}
-		return $texts;
-	}
-
-	/**
 	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
 	 * @return Tx_SuperForms_Validation_Result
 	 */
 	public function validate(Tx_SuperForms_Domain_Model_Response $formResponse) {
 		$validationResult = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->create('Tx_SuperForms_Validation_Result');
+		/** @var $validationResult Tx_SuperForms_Validation_Result */
+
+		if ($this->getWaitinglist() && !$this->getCanSubscribe()) {
+			$validationResult->addError(
+				'_waitinglist_',
+				'no more free places',
+				1330352990
+			);
+		}
+
 		foreach($this->getFields() as $field) {
+			/** @var $fieldValidationResults Tx_SuperForms_Domain_Model_Field_Base */
 			$fieldValidationResults = $field->validate($formResponse);
 			if ($fieldValidationResults->hasErrors()) {
 				$validationResult->addErrors(
@@ -214,11 +213,27 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	}
 
 	/**
-	 * @return Tx_SuperForms_Domain_Model_Processor
+	 * @return null|Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor
 	 */
 	public function getWaitinglist() {
 		$processor = $this->getProcessorByType(Tx_SuperForms_Domain_Model_Processor::TYPE_WAITINGLIST);
 		return $processor ? $processor->getService() : NULL;
+	}
+
+	/**
+	 * @return null|Tx_SuperForms_Domain_Model_Field_Autofill
+	 */
+	public function getWaitinglistFlagField() {
+		$waitinglistFlagField = NULL;
+		$waitinglist = $this->getWaitinglist();
+		foreach ($this->getFields() as $field) {
+			/** @var $field Tx_SuperForms_Domain_Model_Field_Base */
+			if ($field->getType() === Tx_SuperForms_Domain_Model_Field_Base::TYPE_AUTOFILL
+					&& $field->getMode() === 'waiting') {
+				$waitinglistFlagField = $field;
+			}
+		}
+		return $waitinglistFlagField;
 	}
 
 	/**
@@ -272,6 +287,18 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	 */
 	public function getIsEnded() {
 		return (!$this->getEndTime() || ($this->getEndTime() < new DateTime()));
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getCanSubscribe() {
+		$waitinglist = $this->getWaitinglist();
+		if ($waitinglist) {
+			return $waitinglist->getCanSubscribe();
+		} else {
+			return TRUE;
+		}
 	}
 }
 ?>

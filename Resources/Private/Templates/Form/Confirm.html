@@ -1,2 +1,7 @@
 {form.textConfirm}
-<f:for each="{form.processorResultTexts}" as="resultText">{resultText}</f:for>
+<f:if condition="{form.waitinglist}">
+	<f:if condition="{formResponse.isOnWaitinglist}">
+		<f:then>{form.waitinglist.textWaitinglist}</f:then>
+		<f:else>{form.waitinglist.textParticipant}</f:else>
+	</f:if>
+</f:if>

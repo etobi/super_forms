@@ -15,9 +15,20 @@
 					</config>
 				</TCEforms>
 			</settings.maxNumberOfParticipants>
+			<settings.maxNumberOnWaitinglist>
+				<TCEforms>
+					<label>LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_maxNumberOfWaitinglist</label>
+					<config>
+						<type>input</type>
+						<eval>int</eval>
+						<size>5</size>
+						<default>50</default>
+					</config>
+				</TCEforms>
+			</settings.maxNumberOnWaitinglist>
 			<settings.textParticipant>
 				<TCEforms>
-					<label>Text, User ist Teilnehmer</label>
+					<label>LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_textParticipant</label>
 					<config>
 						<type>text</type>
 						<cols>40</cols>
@@ -31,7 +42,7 @@
 			</settings.textParticipant>
 			<settings.textWaitinglist>
 				<TCEforms>
-					<label>Text, User ist auf der Warteliste</label>
+					<label>LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_textWaitinglist</label>
 					<config>
 						<type>text</type>
 						<cols>40</cols>
@@ -43,6 +54,20 @@
 					</defaultExtras>
 				</TCEforms>
 			</settings.textWaitinglist>
+			<settings.textFull>
+				<TCEforms>
+					<label>LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_textFull</label>
+					<config>
+						<type>text</type>
+						<cols>40</cols>
+						<rows>10</rows>
+						<wrap>virtual</wrap>
+					</config>
+					<defaultExtras>
+						richtext[*]:rte_transform[mode=ts_css]
+					</defaultExtras>
+				</TCEforms>
+			</settings.textFull>
 		</el>
 	</ROOT>
 </T3DataStructure>
