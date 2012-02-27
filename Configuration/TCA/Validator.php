@@ -15,6 +15,7 @@ $TCA['tx_superforms_domain_model_validator'] = array(
 		'NumberRange' => array('showitem' => 'type, message, configuration, configuration2'),
 		'StringLength' => array('showitem' => 'type, message, configuration, configuration2'),
 		'RegularExpression' => array('showitem' => 'type, message, configuration'),
+		'Unique' => array('showitem' => 'type, message'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -74,6 +75,7 @@ $TCA['tx_superforms_domain_model_validator'] = array(
 					array('NumberRange', 'NumberRange'),
 					array('StringLength', 'StringLength'),
 					array('RegularExpression', 'RegularExpression'),
+					array('Unique', 'Unique'),
 				),
 				'default' => 'NotEmpty'
 			)

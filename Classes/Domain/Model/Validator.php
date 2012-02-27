@@ -35,6 +35,12 @@ class Tx_SuperForms_Domain_Model_Validator extends Tx_Extbase_DomainObject_Abstr
 	const TYPE_NUMBERRANGE = 'NumberRange';
 	const TYPE_STRINGLENGTH = 'StringLength';
 	const TYPE_REGULAREXPRESSION = 'RegularExpression';
+	const TYPE_UNIQUE = 'Unique';
+
+	/**
+	 * @var Tx_SuperForms_Service_Processing_Database_TableService
+	 */
+	protected $tableService;
 
 	/**
 	 * @var string
@@ -51,6 +57,7 @@ class Tx_SuperForms_Domain_Model_Validator extends Tx_Extbase_DomainObject_Abstr
 		self::TYPE_NUMBERRANGE => 1329154915,
 		self::TYPE_STRINGLENGTH => 1329154916,
 		self::TYPE_REGULAREXPRESSION => 1329154917,
+		self::TYPE_UNIQUE => 1330347053,
 	);
 
 	/**
@@ -67,6 +74,23 @@ class Tx_SuperForms_Domain_Model_Validator extends Tx_Extbase_DomainObject_Abstr
 	 * @var string
 	 */
 	protected $message;
+
+	/**
+	 * @var Tx_SuperForms_Domain_Model_Form
+	 */
+	protected $form;
+
+	/**
+	 * @var Tx_SuperForms_Domain_Model_Field_Base
+	 */
+	protected $field;
+
+	/**
+	 * @return void
+	 */
+	public function initializeObject() {
+		$this->db = $GLOBALS['TYPO3_DB'];
+	}
 
 	/**
 	 * @param string $type
@@ -119,7 +143,7 @@ class Tx_SuperForms_Domain_Model_Validator extends Tx_Extbase_DomainObject_Abstr
 			case self::TYPE_NOTEMPTY:
 				return !empty($value);
 			break;
-			
+
 			case self::TYPE_EMAILADDRESS:
 				return t3lib_div::validEmail($value);
 			break;
@@ -142,6 +166,21 @@ class Tx_SuperForms_Domain_Model_Validator extends Tx_Extbase_DomainObject_Abstr
 			case self::TYPE_REGULAREXPRESSION:
 				return preg_match($this->configuration, $value) > 0;
 			break;
+
+			case self::TYPE_UNIQUE:
+				return ($this->db->sql_num_rows(
+					$this->db->exec_SELECTquery(
+						$this->tableService->getColumnNameForField($this->field),
+						$this->tableService->getTableNameForForm($this->form),
+						$this->tableService->getColumnNameForField($this->field)
+							. ' = '
+							. $this->db->fullQuoteStr(
+								$value,
+								$this->tableService->getTableNameForForm($this->form)
+							)
+					)
+				) === 0);
+			break;
 		}
 		return FALSE;
 	}
@@ -158,6 +197,32 @@ class Tx_SuperForms_Domain_Model_Validator extends Tx_Extbase_DomainObject_Abstr
 	 */
 	public function getCode() {
 		return $this->codeMap[$this->getType()];
+	}
+
+	/**
+	 * @param Tx_SuperForms_Service_Processing_Database_TableService $tableService
+	 * @return void
+	 */
+	public function injectTableService(Tx_SuperForms_Service_Processing_Database_TableService $tableService) {
+		$this->tableService = $tableService;
+	}
+
+	/**
+	 * @param Tx_SuperForms_Domain_Model_Form $form
+	 * @return Tx_SuperForms_Domain_Model_Validator
+	 */
+	public function setForm(Tx_SuperForms_Domain_Model_Form $form) {
+		$this->form = $form;
+		return $this;
+	}
+
+	/**
+	 * @var Tx_SuperForms_Domain_Model_Field_Base $field
+	 * @return Tx_SuperForms_Domain_Model_Validator
+	 */
+	public function setField($field) {
+		$this->field = $field;
+		return $this;
 	}
 }
 ?>

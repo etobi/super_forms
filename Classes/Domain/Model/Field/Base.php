@@ -352,7 +352,7 @@ class Tx_SuperForms_Domain_Model_Field_Base extends Tx_Extbase_DomainObject_Abst
 		$value = $response->get($this->getName());
 
 		foreach ($this->getValidators() as $validator) {
-			if (!$validator->isValid($value)) {
+			if (!$validator->setForm($this->form)->setField($this)->isValid($value)) {
 				$validationResult->addError($this->getName(), $validator->getMessage(), $validator->getCode());
 			}
 		}

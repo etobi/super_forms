@@ -25,7 +25,7 @@ $TCA['tx_superforms_domain_model_field'] = array(
 		'Tx_SuperForms_Domain_Model_Field_Textblock'    => array('showitem' => $tempShowItems['general'] . ', configuration'),
 		'Tx_SuperForms_Domain_Model_Field_Separator'    => array('showitem' => 'type'),
 		'Tx_SuperForms_Domain_Model_Field_Hidden'       => array('showitem' => 'type, name, value'),
-		'Tx_SuperForms_Domain_Model_Field_Autofill'     => array('showitem' => 'type, name, configuration'),
+		'Tx_SuperForms_Domain_Model_Field_Autofill'     => array('showitem' => 'type, name, configuration, ' . $tempShowItems['validators']),
 		'Tx_SuperForms_Domain_Model_Field_WaitinglistCounter'  => array('showitem' => 'type'),
 	),
 	'palettes' => array(
