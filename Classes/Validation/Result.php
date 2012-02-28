@@ -86,6 +86,18 @@ class Tx_SuperForms_Validation_Result {
 	public function hasErrors() {
 		return $this->errors !== NULL;
 	}
+
+	/**
+	 * @param string $name
+	 * @param array $arguments
+	 * @return mixed|void
+	 */
+	public function __call($name, $arguments) {
+		$fieldname = lcfirst(substr($name, 3));
+		if (substr($name, 0, 3) === 'get') {
+			return $this->getErrorsForField($fieldname);
+		}
+	}
 }
 
 ?>

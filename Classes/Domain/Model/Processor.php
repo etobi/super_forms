@@ -98,6 +98,14 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getShortType() {
+		list($_, $shortType) = t3lib_div::revExplode('_', $this->getType(), 2);
+		return $shortType;
+	}
+
+	/**
 	 * @param string $configuration
 	 */
 	public function setConfiguration($configuration) {
@@ -142,7 +150,7 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 	}
 
 	/**
-	 * @param $formResponse
+	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
 	 * @return void
 	 */
 	public function process($formResponse) {
@@ -150,6 +158,14 @@ class Tx_SuperForms_Domain_Model_Processor extends Tx_Extbase_DomainObject_Abstr
 		if ($processorService instanceof Tx_SuperForms_Service_Processing_ProcessorInterface) {
 			$processorService->process($formResponse);
 		}
+	}
+
+	/**
+	 * @param Tx_SuperForms_Domain_Model_Response $response
+	 * @return Tx_SuperForms_Validation_Result
+	 */
+	public function validate($response) {
+		return $this->getService()->validate($response);
 	}
 
 	/**

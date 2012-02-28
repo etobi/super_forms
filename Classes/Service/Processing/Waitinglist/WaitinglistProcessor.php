@@ -73,6 +73,22 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	}
 
 	/**
+	 * @param Tx_SuperForms_Domain_Model_Response $response
+	 * @return Tx_SuperForms_Validation_Result
+	 */
+	public function validate($response) {
+		$validationResult = parent::validate($response);
+		if (!$this->getCanSubscribe()) {
+			$validationResult->addError(
+				'__waitinglist__',
+				'no more free places',
+				1330352990
+			);
+		}
+		return $validationResult;
+	}
+
+	/**
 	 * @return void
 	 */
 	public function getParticipantCount() {

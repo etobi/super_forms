@@ -43,6 +43,7 @@
 			<label index="FlexForm.Display.sheet.general">Generelles</label>
 			<label index="FlexForm.Display.form">Formular</label>
 			<label index="form.errorMessage">Fehlerhafte Eingabe</label>
+			<label index="form.errorMessage.1330352990"></label>
 			<label index="label.freePlaces">Es sind noch %s Plätze frei.</label>
 			<label index="label.noMoreFreePlaces">Leider sind schon alle Plätze belegt. Du kannst dich aber auf die Warteliste eintragen. Wir werden dir bei Absagen anderer Kinder einen Platz zuweisen.</label>
 		</languageKey>

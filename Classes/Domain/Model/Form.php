@@ -160,14 +160,19 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 		$validationResult = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->create('Tx_SuperForms_Validation_Result');
 		/** @var $validationResult Tx_SuperForms_Validation_Result */
 
-		if ($this->getWaitinglist() && !$this->getCanSubscribe()) {
-			$validationResult->addError(
-				'_waitinglist_',
-				'no more free places',
-				1330352990
-			);
+		/** @var $processor Tx_SuperForms_Domain_Model_Processor */
+		foreach($this->getProcessors() as $processor) {
+			/** @var $processorValidationResults Tx_SuperForms_Domain_Model_Field_Base */
+			$processorValidationResults = $processor->validate($formResponse);
+			if ($processorValidationResults->hasErrors()) {
+				$validationResult->addErrors(
+					'_processor' . $processor->getShortType(),
+					$processorValidationResults->getErrors()
+				);
+			}
 		}
 
+		/** @var $field Tx_SuperForms_Domain_Model_Field_Base */
 		foreach($this->getFields() as $field) {
 			/** @var $fieldValidationResults Tx_SuperForms_Domain_Model_Field_Base */
 			$fieldValidationResults = $field->validate($formResponse);
