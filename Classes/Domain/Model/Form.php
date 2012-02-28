@@ -291,7 +291,7 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	 * @return boolean
 	 */
 	public function getIsEnded() {
-		return (!$this->getEndTime() || ($this->getEndTime() < new DateTime()));
+		return ($this->getEndTime() && ($this->getEndTime() < new DateTime()));
 	}
 
 	/**

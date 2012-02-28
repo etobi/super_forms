@@ -6,7 +6,7 @@
 		<f:form action="render" object="{formResponse}" name="formResponse" addQueryString="TRUE" noCacheHash="TRUE">
 			<f:form.hidden property="form" value="{form}" />
 			<f:for each="{form.fields}" as="field">
-				<div class="form-field-row form-field-row-{field.shortType}">
+				<div class="form-field-row form-field-row-{field.shortType} form-field-{field.name} {f:if(condition: field.validationDependsOnField, then: 'field-dependson-{field.validationDependsOnField.name}')}">
 					<f:render partial="Field_{field.shortType}" arguments="{field: field, formResponse: formResponse, validationResult: validationResult}" />
 				</div>
 			</f:for>
