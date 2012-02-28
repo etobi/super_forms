@@ -55,6 +55,16 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	protected $textConfirm;
 
 	/**
+	 * @var DateTime
+	 */
+	protected $startTime;
+
+	/**
+	 * @var DateTime
+	 */
+	protected $endTime;
+
+	/**
 	 *
 	 */
 	public function __construct() {}
@@ -143,24 +153,28 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	}
 
 	/**
-	 * @return array
-	 */
-	public function getProcessorResultTexts() {
-		$texts = array();
-		foreach($this->getProcessors() as $processor) {
-			$text = $processor->getService()->getText();
-			if ($text) $texts[] = $text;
-		}
-		return $texts;
-	}
-
-	/**
 	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
 	 * @return Tx_SuperForms_Validation_Result
 	 */
 	public function validate(Tx_SuperForms_Domain_Model_Response $formResponse) {
 		$validationResult = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->create('Tx_SuperForms_Validation_Result');
+		/** @var $validationResult Tx_SuperForms_Validation_Result */
+
+		/** @var $processor Tx_SuperForms_Domain_Model_Processor */
+		foreach($this->getProcessors() as $processor) {
+			/** @var $processorValidationResults Tx_SuperForms_Domain_Model_Field_Base */
+			$processorValidationResults = $processor->validate($formResponse);
+			if ($processorValidationResults->hasErrors()) {
+				$validationResult->addErrors(
+					'_processor' . $processor->getShortType(),
+					$processorValidationResults->getErrors()
+				);
+			}
+		}
+
+		/** @var $field Tx_SuperForms_Domain_Model_Field_Base */
 		foreach($this->getFields() as $field) {
+			/** @var $fieldValidationResults Tx_SuperForms_Domain_Model_Field_Base */
 			$fieldValidationResults = $field->validate($formResponse);
 			if ($fieldValidationResults->hasErrors()) {
 				$validationResult->addErrors(
@@ -201,6 +215,95 @@ class Tx_SuperForms_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEn
 	 */
 	public function getTextConfirm() {
 		return $this->textConfirm;
+	}
+
+	/**
+	 * @return null|Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor
+	 */
+	public function getWaitinglist() {
+		$processor = $this->getProcessorByType(Tx_SuperForms_Domain_Model_Processor::TYPE_WAITINGLIST);
+		return $processor ? $processor->getService() : NULL;
+	}
+
+	/**
+	 * @return null|Tx_SuperForms_Domain_Model_Field_Autofill
+	 */
+	public function getWaitinglistFlagField() {
+		$waitinglistFlagField = NULL;
+		$waitinglist = $this->getWaitinglist();
+		foreach ($this->getFields() as $field) {
+			/** @var $field Tx_SuperForms_Domain_Model_Field_Base */
+			if ($field->getType() === Tx_SuperForms_Domain_Model_Field_Base::TYPE_AUTOFILL
+					&& $field->getMode() === 'waiting') {
+				$waitinglistFlagField = $field;
+			}
+		}
+		return $waitinglistFlagField;
+	}
+
+	/**
+	 * @param DateTime $startTime
+	 * @return Tx_SuperForms_Domain_Model_Form this
+	 */
+	public function setStartTime($startTime) {
+		$this->startTime = $startTime;
+		return $this;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function getStartTime() {
+		return $this->startTime;
+	}
+
+	/**
+	 * @param DateTime $endTime
+	 * @return Tx_SuperForms_Domain_Model_Form this
+	 */
+	public function setEndTime($endTime) {
+		$this->endTime = $endTime;
+		return $this;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function getEndTime() {
+		return $this->endTime;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getIsActive() {
+		return (!$this->getIsNotStarted() && !$this->getIsEnded());
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getIsNotStarted() {
+		return ($this->getStartTime() && $this->getStartTime() > new DateTime());
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getIsEnded() {
+		return (!$this->getEndTime() || ($this->getEndTime() < new DateTime()));
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getCanSubscribe() {
+		$waitinglist = $this->getWaitinglist();
+		if ($waitinglist) {
+			return $waitinglist->getCanSubscribe();
+		} else {
+			return TRUE;
+		}
 	}
 }
 ?>

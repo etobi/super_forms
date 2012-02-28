@@ -32,7 +32,12 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	/**
 	 * @var int
 	 */
-	protected $maxNumberOfParticipants = 5;
+	protected $maxNumberOfParticipants = 999;
+
+	/**
+	 * @var int
+	 */
+	protected $maxNumberOnWaitinglist = 999;
 
 	/**
 	 * @var string
@@ -45,9 +50,19 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	protected $textWaitinglist;
 
 	/**
-	 * @var bool
+	 * @var string
 	 */
-	protected $isOnWaitinglist;
+	protected $textFull;
+
+	/**
+	 * @var int
+	 */
+	protected $participantCount;
+
+	/**
+	 * @var string
+	 */
+	protected $waitinglistFlagFieldname;
 
 	/**
 	 * @param Tx_SuperForms_Domain_Model_Response $formResponse
@@ -58,24 +73,118 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	}
 
 	/**
+	 * @param Tx_SuperForms_Domain_Model_Response $response
+	 * @return Tx_SuperForms_Validation_Result
+	 */
+	public function validate($response) {
+		$validationResult = parent::validate($response);
+		if (!$this->getCanSubscribe()) {
+			$validationResult->addError(
+				'__waitinglist__',
+				'no more free places',
+				1330352990
+			);
+		}
+		return $validationResult;
+	}
+
+	/**
+	 * @return void
+	 */
+	public function getParticipantCount() {
+		if ($this->participantCount === NULL) {
+			$databaseProcessor = $this->getForm()->getProcessorByType(Tx_SuperForms_Domain_Model_Processor::TYPE_DATABASE);
+			$this->participantCount = $databaseProcessor->getService()->getRecordCount();
+		}
+		return $this->participantCount;
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function isOnWaitinglist() {
-		if ($this->isOnWaitinglist === NULL) {
-			$databaseProcessor = $this->getForm()->getProcessorByType(Tx_SuperForms_Domain_Model_Processor::TYPE_DATABASE);
-			$this->isOnWaitinglist = $databaseProcessor ?
-				($databaseProcessor->getService()->getRecordCount() >= $this->maxNumberOfParticipants) :
-				FALSE;
-		}
-		return $this->isOnWaitinglist;
+		return !$this->getHasFreePlaces() && $this->getHasFreeWaitinglistPlaces();
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getFreePlacesCount() {
+		return $this->maxNumberOfParticipants - $this->getParticipantCount();
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getCountOnWaitinglist() {
+		$count = ($this->maxNumberOfParticipants - $this->getParticipantCount());
+		if ($count > 0) $count = 0;
+		return $count * -1;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getCanSubscribe() {
+		return $this->getHasFreePlaces() || $this->getHasFreeWaitinglistPlaces();
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getHasFreePlaces() {
+		return $this->getFreePlacesCount() > 0;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getHasFreeWaitinglistPlaces() {
+		return $this->getCountOnWaitinglist() < $this->getMaxNumberOnWaitinglist();
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getMaxNumberOfParticipants() {
+		return $this->maxNumberOfParticipants;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getMaxNumberOnWaitinglist() {
+		return $this->maxNumberOnWaitinglist;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getText() {
-		return $this->isOnWaitinglist ? $this->textWaitinglist : $this->textParticipant;
+	public function getTextFull() {
+		return $this->textFull;
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getTextParticipant() {
+		return $this->textParticipant;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTextWaitinglist() {
+		return $this->textWaitinglist;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getWaitinglistFlagFieldname() {
+		return $this->waitinglistFlagFieldname;
+	}
+
 }
 
 ?>

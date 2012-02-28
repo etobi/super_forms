@@ -42,7 +42,7 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 	/**
 	 * @var string
 	 */
-	protected $tablePrefix = 'tx_superforms_domain_model_dynamic_response_';
+	protected $tablePrefix = 'user_superforms_domain_model_dynamic_response_';
 
 	/**
 	 * @var string
@@ -55,6 +55,8 @@ class Tx_SuperForms_Service_Processing_Database_TableService implements t3lib_Si
 	protected $columnDefinitionMap = array(
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_BASE => FALSE,
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_TEXTBLOCK => FALSE,
+		Tx_SuperForms_Domain_Model_Field_Base::TYPE_WAITINGLISTCOUNTER => FALSE,
+		Tx_SuperForms_Domain_Model_Field_Base::TYPE_SEPARATOR => FALSE,
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_TEXTAREA => array('text', 'DEFAULT \'\' NOT NULL'),
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_TEXTFIELD => array('varchar(255)', 'DEFAULT \'\' NOT NULL'),
 		Tx_SuperForms_Domain_Model_Field_Base::TYPE_RADIO => array('varchar(255)', 'DEFAULT \'\' NOT NULL'),

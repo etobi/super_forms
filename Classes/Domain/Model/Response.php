@@ -124,6 +124,17 @@ class Tx_SuperForms_Domain_Model_Response extends Tx_Extbase_DomainObject_Abstra
 		}
 	}
 
+	/**
+	 * @return bool|mixed
+	 */
+	public function getIsOnWaitinglist() {
+		$field = $this->form->getWaitinglistFlagField();
+		if ($field) {
+			return $this->get($field->getName());
+		}
+		return FALSE;
+	}
+
 }
 
 ?>

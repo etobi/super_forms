@@ -69,10 +69,12 @@ abstract class Tx_SuperForms_Service_Processing_AbstractProcessor implements Tx_
 	}
 
 	/**
-	 * @return void
+	 * @param Tx_SuperForms_Domain_Model_Response $response
+	 * @return Tx_SuperForms_Validation_Result
 	 */
-	public function getText() {
-		return NULL;
+	public function validate($response) {
+		$validationResult = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->create('Tx_SuperForms_Validation_Result');
+		return $validationResult;
 	}
 
 	/**
