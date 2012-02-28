@@ -4,7 +4,7 @@
 		<f:then><f:translate key="label.freePlaces" extensionName="super_forms" arguments="{0:form.waitinglist.freePlacesCount}" /></f:then>
 		<f:else>
 			<div class="tickiMessage">
-				<f:translate key="label.noMoreFreePlaces" extensionName="super_forms" />
+				{form.waitinglist.textPreWaitinglist -> f:format.raw()}
 			</div>
 		</f:else>
 	</f:if>

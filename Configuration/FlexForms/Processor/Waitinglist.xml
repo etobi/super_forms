@@ -26,6 +26,20 @@
 					</config>
 				</TCEforms>
 			</settings.maxNumberOnWaitinglist>
+			<settings.textPreWaitinglist>
+				<TCEforms>
+					<label>LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_textPreWaitinglist</label>
+					<config>
+						<type>text</type>
+						<cols>40</cols>
+						<rows>10</rows>
+						<wrap>virtual</wrap>
+					</config>
+					<defaultExtras>
+						richtext[*]:rte_transform[mode=ts_css]
+					</defaultExtras>
+				</TCEforms>
+			</settings.textPreWaitinglist>
 			<settings.textParticipant>
 				<TCEforms>
 					<label>LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration_textParticipant</label>

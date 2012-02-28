@@ -55,6 +55,11 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	protected $textFull;
 
 	/**
+	 * @var string
+	 */
+	protected $textPreWaitinglist;
+
+	/**
 	 * @var int
 	 */
 	protected $participantCount;
@@ -183,6 +188,20 @@ class Tx_SuperForms_Service_Processing_Waitinglist_WaitinglistProcessor extends 
 	 */
 	public function getWaitinglistFlagFieldname() {
 		return $this->waitinglistFlagFieldname;
+	}
+
+	/**
+	 * @param string $textPreWaitinglist
+	 */
+	public function setTextPreWaitinglist($textPreWaitinglist) {
+		$this->textPreWaitinglist = $textPreWaitinglist;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTextPreWaitinglist() {
+		return $this->textPreWaitinglist;
 	}
 
 }
