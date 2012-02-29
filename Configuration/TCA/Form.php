@@ -9,7 +9,7 @@ $TCA['tx_superforms_domain_model_form'] = array(
 		'showRecordFieldList' => '',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'hidden;;1, title, name,' .
+		'1' => array('showitem' => 'sys_language_uid, hidden;;1, title, name,' .
 			'--div--;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.fields, fields,' .
 			'--div--;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.processors, processors,' .
 			'--div--;LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.texts, text_confirm'
@@ -61,6 +61,7 @@ $TCA['tx_superforms_domain_model_form'] = array(
 
 		'hidden' => array(
 			'exclude' => 1,
+			'l10n_mode' => 'exclude',
 			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
 			'config' => array(
 				'type' => 'check',
@@ -68,7 +69,7 @@ $TCA['tx_superforms_domain_model_form'] = array(
 		),
 		'starttime' => array(
 			'exclude' => 1,
-			'l10n_mode' => 'mergeIfNotBlank',
+			'l10n_mode' => 'exclude',
 			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.starttime',
 			'config' => array(
 				'type' => 'input',
@@ -81,7 +82,7 @@ $TCA['tx_superforms_domain_model_form'] = array(
 		),
 		'endtime' => array(
 			'exclude' => 1,
-			'l10n_mode' => 'mergeIfNotBlank',
+			'l10n_mode' => 'exclude',
 			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.endtime',
 			'config' => array(
 				'type' => 'input',
@@ -97,7 +98,6 @@ $TCA['tx_superforms_domain_model_form'] = array(
 		),
 		'title' => array(
 			'exclude' => 0,
-			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_form.title',
 			'config' => array(
 				'type' => 'input',

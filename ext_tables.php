@@ -20,6 +20,9 @@ $TCA['tx_superforms_domain_model_form'] = array(
 			'disabled' => 'hidden',
 				// we handle the enableField ourselves
 		),
+		'languageField' => 'sys_language_uid',
+		'transOrigPointerField' => 'l10n_parent',
+		'transOrigDiffSourceField' => 'l10n_diffsource',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Form.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/model.gif'
 	),
@@ -39,6 +42,9 @@ $TCA['tx_superforms_domain_model_field'] = array(
 		'sortby' => 'sorting',
 		'hideTable' => TRUE,
 		'enablecolumns' => array(),
+		'languageField' => 'sys_language_uid',
+		'transOrigPointerField' => 'l10n_parent',
+		'transOrigDiffSourceField' => 'l10n_diffsource',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Field.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/model.gif'
 	),
@@ -56,6 +62,9 @@ $TCA['tx_superforms_domain_model_processor'] = array(
 		'type' => 'type',
 		'hideTable' => TRUE,
 		'enablecolumns' => array(),
+		'languageField' => 'sys_language_uid',
+		'transOrigPointerField' => 'l10n_parent',
+		'transOrigDiffSourceField' => 'l10n_diffsource',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Processor.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/model.gif'
 	),
@@ -73,6 +82,9 @@ $TCA['tx_superforms_domain_model_validator'] = array(
 		'type' => 'type',
 		'hideTable' => TRUE,
 		'enablecolumns' => array(),
+		'languageField' => 'sys_language_uid',
+		'transOrigPointerField' => 'l10n_parent',
+		'transOrigDiffSourceField' => 'l10n_diffsource',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Validator.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/model.gif'
 	),

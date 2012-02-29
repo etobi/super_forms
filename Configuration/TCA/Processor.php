@@ -9,10 +9,10 @@ $TCA['tx_superforms_domain_model_processor'] = array(
 		'showRecordFieldList' => '',
 	),
 	'types' => array(
-		'0' => array('showitem' => 'type, title'),
-		'Tx_SuperForms_Domain_Model_Processor_Email' => array('showitem' => 'type, configuration'),
-		'Tx_SuperForms_Domain_Model_Processor_Database' => array('showitem' => 'type'),
-		'Tx_SuperForms_Domain_Model_Processor_Waitinglist' => array('showitem' => 'type, configuration'),
+		'0' => array('showitem' => 'sys_language_uid, type, title'),
+		'Tx_SuperForms_Domain_Model_Processor_Email' => array('showitem' => 'sys_language_uid, type, configuration'),
+		'Tx_SuperForms_Domain_Model_Processor_Database' => array('showitem' => 'sys_language_uid, type'),
+		'Tx_SuperForms_Domain_Model_Processor_Waitinglist' => array('showitem' => 'sys_language_uid, type, configuration'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -76,7 +76,6 @@ $TCA['tx_superforms_domain_model_processor'] = array(
 		),
 		'configuration' => array(
 			'exclude' => 0,
-			'l10n_mode' => 'exclude',
 			'label' => 'LLL:EXT:super_forms/Resources/Private/Language/locallang.xml:tx_superforms_domain_model_processor.configuration',
 			'config' => array(
 				'type' => 'flex',
@@ -88,6 +87,7 @@ $TCA['tx_superforms_domain_model_processor'] = array(
 			)
 		),
 		'form' => array(
+			'l10n_mode' => 'exclude',
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_superforms_domain_model_form',
