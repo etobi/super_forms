@@ -3,7 +3,7 @@
 	<f:if condition="{form.waitinglist.hasFreePlaces}">
 		<f:then><f:translate key="label.freePlaces" extensionName="super_forms" arguments="{0:form.waitinglist.freePlacesCount}" /></f:then>
 		<f:else>
-			<div class="tickiMessage">
+			<div class="noticeWaitinglist">
 				{form.waitinglist.textPreWaitinglist -> f:format.raw()}
 			</div>
 		</f:else>
